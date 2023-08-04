@@ -15,6 +15,8 @@ $ cargo install mdbook
 $ mdbook build
 $ mdbook serve
 ```
+## 效果
+![效果图](image/image1.png)
 
 ## 参考项目
 
