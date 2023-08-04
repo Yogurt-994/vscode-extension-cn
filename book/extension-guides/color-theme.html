@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>色彩主题 - VS Code 插件开发文档</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">预备知识</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../preknowledge/first-step.html"><strong aria-hidden="true">1.</strong> 非JS开发者的第一步</a></li><li class="chapter-item expanded "><a href="../preknowledge/variable-and-type.html"><strong aria-hidden="true">2.</strong> Typescript-变量和类型</a></li><li class="chapter-item expanded "><a href="../preknowledge/class.html"><strong aria-hidden="true">3.</strong> Typescript-类</a></li><li class="chapter-item expanded "><a href="../preknowledge/interface-and-namespace.html"><strong aria-hidden="true">4.</strong> Typescript-接口和命名空间</a></li><li class="chapter-item expanded "><a href="../preknowledge/generics.html"><strong aria-hidden="true">5.</strong> Typescript-泛型</a></li><li class="chapter-item expanded "><a href="../preknowledge/declaration-files.html"><strong aria-hidden="true">6.</strong> Typescript-声明文件</a></li><li class="chapter-item expanded affix "><li class="part-title">第一步</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../get-started/your-first-extension.html"><strong aria-hidden="true">7.</strong> 你的第一个插件</a></li><li class="chapter-item expanded "><a href="../get-started/extension-anatomy.html"><strong aria-hidden="true">8.</strong> 解析插件结构</a></li><li class="chapter-item expanded "><a href="../get-started/wrapping-up.html"><strong aria-hidden="true">9.</strong> 小结</a></li><li class="chapter-item expanded affix "><li class="part-title">开发插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../working-with-extensions/testing-extension.html"><strong aria-hidden="true">10.</strong> 测试插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/publish-extension.html"><strong aria-hidden="true">11.</strong> 发布插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/bundling-extension.html"><strong aria-hidden="true">12.</strong> 打包插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/continuous-integration.html"><strong aria-hidden="true">13.</strong> 持集成</a></li><li class="chapter-item expanded affix "><li class="part-title">插件功能</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-capabilities/index.html"><strong aria-hidden="true">14.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/common-capabilities.html"><strong aria-hidden="true">15.</strong> 常用功能</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/theming.html"><strong aria-hidden="true">16.</strong> 主题</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/extending-workbench.html"><strong aria-hidden="true">17.</strong> 扩展工作台</a></li><li class="chapter-item expanded affix "><li class="part-title">插件指南</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-guides/index.html"><strong aria-hidden="true">18.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-guides/command.html"><strong aria-hidden="true">19.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../extension-guides/color-theme.html" class="active"><strong aria-hidden="true">20.</strong> 色彩主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/file-icon-theme.html"><strong aria-hidden="true">21.</strong> 文件图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/product-icon-theme.html"><strong aria-hidden="true">22.</strong> 产品图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/tree-view.html"><strong aria-hidden="true">23.</strong> 树视图</a></li><li class="chapter-item expanded "><a href="../extension-guides/webview.html"><strong aria-hidden="true">24.</strong> Webview</a></li><li class="chapter-item expanded "><a href="../extension-guides/notebook.html"><strong aria-hidden="true">25.</strong> 笔记本</a></li><li class="chapter-item expanded "><a href="../extension-guides/virtual-documents.html"><strong aria-hidden="true">26.</strong> 虚拟文档</a></li><li class="chapter-item expanded "><a href="../extension-guides/task-provider.html"><strong aria-hidden="true">27.</strong> 任务</a></li><li class="chapter-item expanded "><a href="../extension-guides/scm-provider.html"><strong aria-hidden="true">28.</strong> 源控制</a></li><li class="chapter-item expanded "><a href="../extension-guides/debugger-extension.html"><strong aria-hidden="true">29.</strong> 调试器插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/markdown-extension.html"><strong aria-hidden="true">30.</strong> Markdown插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-editors.html"><strong aria-hidden="true">31.</strong> 自定义编辑器</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-data-extension.html"><strong aria-hidden="true">32.</strong> 自定义数据插件</a></li><li class="chapter-item expanded affix "><li class="part-title">语言插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../language-extensions/index.html"><strong aria-hidden="true">33.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../language-extensions/syntax-highlight-guide.html"><strong aria-hidden="true">34.</strong> 语法高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/semantic-highlight-guide.html"><strong aria-hidden="true">35.</strong> 语义高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/snippet-guide.html"><strong aria-hidden="true">36.</strong> 代码片段</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-configuration-guide.html"><strong aria-hidden="true">37.</strong> 语言配置</a></li><li class="chapter-item expanded "><a href="../language-extensions/programmatic-language-features.html"><strong aria-hidden="true">38.</strong> 程序性语言特性</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-server-extension-guide.html"><strong aria-hidden="true">39.</strong> 语言服务器</a></li><li class="chapter-item expanded "><a href="../language-extensions/embedded-languages.html"><strong aria-hidden="true">40.</strong> 嵌入语言</a></li><li class="chapter-item expanded affix "><li class="part-title">进阶主题</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../advanced-topics/extension-host.html"><strong aria-hidden="true">41.</strong> 插件主机</a></li><li class="chapter-item expanded "><a href="../advanced-topics/remote-extensions.html"><strong aria-hidden="true">42.</strong> 远程开发</a></li><li class="chapter-item expanded "><a href="../advanced-topics/using-proposed-api.html"><strong aria-hidden="true">43.</strong> 使用不稳定的API</a></li><li class="chapter-item expanded affix "><li class="part-title">️️参考</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../references/vscode-api.html"><strong aria-hidden="true">44.</strong> VS Code API</a></li><li class="chapter-item expanded "><a href="../references/contribution-points.html"><strong aria-hidden="true">45.</strong> 发布内容配置</a></li><li class="chapter-item expanded "><a href="../references/activation-events.html"><strong aria-hidden="true">46.</strong> 激活事件</a></li><li class="chapter-item expanded "><a href="../references/extension-manifest.html"><strong aria-hidden="true">47.</strong> 插件清单</a></li><li class="chapter-item expanded "><a href="../references/commands.html"><strong aria-hidden="true">48.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../references/when-clause-contexts.html"><strong aria-hidden="true">49.</strong> when 子句上下文</a></li><li class="chapter-item expanded "><a href="../references/theme-color.html"><strong aria-hidden="true">50.</strong> 主题色彩</a></li><li class="chapter-item expanded "><a href="../references/icons-in-labels.html"><strong aria-hidden="true">51.</strong> 标签中的图标</a></li><li class="chapter-item expanded "><a href="../references/document-selector.html"><strong aria-hidden="true">52.</strong> 文档选择器</a></li><li class="chapter-item expanded "><a href="../references/extension-guidelines.html"><strong aria-hidden="true">53.</strong> 插件开发准则</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">VS Code 插件开发文档</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="色彩主题"><a class="header" href="#色彩主题">色彩主题</a></h1>
+<p>色彩可视化工作在VS Code可以分成两种类型：</p>
+<ul>
+<li>工作台（Workbench）色彩：在视图和编辑器中使用的工作台（Workbench）色彩，包括视图、编辑器、活动栏、状态栏等。整个色彩列表<a href="/references/theme-color">查看这里</a>。</li>
+<li>语法色彩：语法色彩就是编辑器中代码的颜色，它基于TextMate语法和TextMate主题规则进行着色。</li>
+</ul>
+<p>下面将分别介绍这两种类型。</p>
+<h2 id="工作台色彩"><a class="header" href="#工作台色彩">工作台色彩</a></h2>
+<hr />
+<p>创建工作台色彩最简单的方式就是使用现成的主题，然后开始定制。</p>
+<ul>
+<li>在VS Code中切换到你想要编辑的色彩主题。</li>
+<li>打开<a href="https://code.visualstudio.com/docs/getstarted/settings">设置</a>，用<code>workbench.colorCustomizations</code>修改视图和编辑器色彩。一般来说会即时生效，如果没有生效你需要自己重启VS Code。</li>
+</ul>
+<p>下面是一个改变了标题栏颜色的配置</p>
+<pre><code class="language-json">{
+	&quot;workbench.colorCustomizations&quot;: {
+		&quot;titleBar.activeBackground&quot;: &quot;#ff0000&quot;
+	}
+}
+</code></pre>
+<ul>
+<li><a href="/references/theme-color">完整的主题色彩列表</a></li>
+</ul>
+<h2 id="语法色彩"><a class="header" href="#语法色彩">语法色彩</a></h2>
+<hr />
+<p>新建语法高亮色彩有两种方式：</p>
+<ul>
+<li>直接使用社区现成的TextMate主题（<code>.tmTheme</code>文件）</li>
+<li>自己想一个主题规则出来</li>
+</ul>
+<p>当然，还有更简单的方式：</p>
+<ul>
+<li>切换到色彩主题，用<a href="https://code.visualstudio.com/docs/getstarted/settings">设置</a>中的<code>editor.tokenColorCustomizations</code>进行自定义，就像上面修改工作台色彩一样，修改会立即呈现，你不需要重启VS Code。</li>
+</ul>
+<p>下面的例子修改了编辑器中注释的颜色：</p>
+<pre><code class="language-json">{
+	&quot;editor.tokenColorCustomizations&quot;: {
+		&quot;comments&quot;: &quot;#FF0000&quot;
+	}
+}
+</code></pre>
+<p>设置支持一些简单的语法标识模型，比如“comments”，“strings”，“numbers”等等。如果你想定制更多颜色，那么直接应用TextMate语法规则就可以了，详见<a href="/language-extensions/syntax-highlight-guide">语法高亮指南</a>。</p>
+<h2 id="创建新的色彩主题"><a class="header" href="#创建新的色彩主题">创建新的色彩主题</a></h2>
+<hr />
+<p>既然你已经用过<code>workbench.colorCustomizations</code>和<code>editor.tokenColorCustomizations</code>笨拙地修改过颜色，那么接下来我们可以见识见识大杀器了。</p>
+<ul>
+<li>打开<strong>命令面板</strong>输入<strong>Developer: Generate Color Theme from Current Settings</strong></li>
+<li>使用VS Code的 <a href="http://yeoman.io/">Yeoman</a> 插件生成器，生成新的主题：</li>
+</ul>
+<pre><code class="language-bash">npm install -g yo generator-code
+yo code
+</code></pre>
+<ul>
+<li>如果你像下图这样选择了自定义主题，则选择'Start fresh'</li>
+</ul>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/color-theme/yocode-colortheme.png" alt="生成新主题" /></p>
+<ul>
+<li>把从设置中生成的主题文件复制到新的插件中</li>
+<li>如果你想使用现成的TextMate主题，那你就需要在插件生成的时候选择导入TextMate主题并打包。另外，如果你下载了一个主题，那么只要用<code>.tmTheme</code>链接替换<code>tokenColors</code>部分就可以了。</li>
+</ul>
+<pre><code class="language-json">{
+    &quot;type&quot;: &quot;dark&quot;,
+    &quot;colors&quot;: {
+        &quot;editor.background&quot;: &quot;#1e1e1e&quot;,
+        &quot;editor.foreground&quot;: &quot;#d4d4d4&quot;,
+        &quot;editorIndentGuide.background&quot;: &quot;#404040&quot;,
+        &quot;editorRuler.foreground&quot;: &quot;#333333&quot;,
+        &quot;activityBarBadge.background&quot;: &quot;#007acc&quot;,
+        &quot;sideBarTitle.foreground&quot;: &quot;#bbbbbb&quot;
+    },
+    &quot;tokenColors&quot;: &quot;./Diner.tmTheme&quot;
+}
+</code></pre>
+<p>?&gt; 为你的色彩文件添加<code>.color-theme.json</code>前缀，那么你在编辑这个文件时就能自动获得悬浮提示、代码补全、色彩装饰器和色彩选择器等功能了。</p>
+<p>?&gt; <a href="https://colorsublime.github.io/">ColorSublime</a>有成百上千个现成的TextMate主题。你可以选择一个你喜欢的主题，复制下载链接，然后用Yeoman选择这个主题生成你的插件。格式如：<code>&quot;https://raw.githubusercontent.com/Colorsublime/Colorsublime-Themes/master/themes/(name).tmTheme&quot;</code></p>
+<h2 id="测试新的主题"><a class="header" href="#测试新的主题">测试新的主题</a></h2>
+<hr />
+<p>通过按<kbd>F5</kbd>打开一个插件主机开发窗口，来测试主题。</p>
+<p>通过<strong>文件 &gt; 首选项 &gt; 颜色主题</strong>，在下拉菜单里找到你的主题。然后通过移动<kbd>上下箭头</kbd>，预览你自己的主题。</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/color-theme/mytheme.png" alt="选择我的主题" /></p>
+<p>主题文件的改动，会实时同步到<code>插件开发主机</code>窗口。</p>
+<h2 id="将主题发布到插件市场"><a class="header" href="#将主题发布到插件市场">将主题发布到插件市场</a></h2>
+<hr />
+<p>如果你想把主题分享给社区，通过<a href="https://code.visualstudio.com/docs/editor/extension-gallery">插件市场</a>去发布它吧。用<a href="/working-with-extensions/publish-extension">vsce publishing tool</a>打包你的主题然后发布到VS Code市场。</p>
+<p>?&gt; 小贴士：想要用户轻松地找到你的主题，最好修改一下<code>package.json</code>，把关键字&quot;theme&quot;写到插件描述（extension description）中，然后把<code>Category</code>设置为<code>Theme</code></p>
+<p>要想让你的插件在插件市场上看起来更好一点，我们建议你参考一下<a href="/references/extension-manifest#%E6%8F%92%E4%BB%B6%E5%B8%82%E5%9C%BA%E5%B1%95%E7%A4%BA%E5%B0%8F%E8%B4%B4%E5%A3%AB">插件市场展示小贴士</a>。</p>
+<h2 id="添加新的色彩id"><a class="header" href="#添加新的色彩id">添加新的色彩id</a></h2>
+<hr />
+<p><a href="/references/contribution-points#contributescolors">色彩配置点</a>可以配置插件的<em>色彩id</em>，当在<code>workbench.colorCustomizations</code>和主题文件中使用代码补全时，这些色彩也会出现。用户可以在<a href="https://code.visualstudio.com/docs/editor/extension-gallery#_extension-details">插件配置</a>选项卡中看到插件定义了什么颜色。</p>
+<h2 id="更多"><a class="header" href="#更多">更多</a></h2>
+<ul>
+<li><a href="https://css-tricks.com/creating-a-vs-code-theme/">CSS Tricks - 新建一个VS Code主题</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../extension-guides/command.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../extension-guides/file-icon-theme.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../extension-guides/command.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../extension-guides/file-icon-theme.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

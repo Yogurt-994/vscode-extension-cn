@@ -1,0 +1,6 @@
+[book]
+authors = ["Yogurt"]
+language = "en"
+multilingual = false
+src = "src"
+title = "VS Code 插件开发文档"

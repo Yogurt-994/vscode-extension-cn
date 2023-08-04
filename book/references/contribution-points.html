@@ -1,0 +1,879 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>发布内容配置 - VS Code 插件开发文档</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">预备知识</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../preknowledge/first-step.html"><strong aria-hidden="true">1.</strong> 非JS开发者的第一步</a></li><li class="chapter-item expanded "><a href="../preknowledge/variable-and-type.html"><strong aria-hidden="true">2.</strong> Typescript-变量和类型</a></li><li class="chapter-item expanded "><a href="../preknowledge/class.html"><strong aria-hidden="true">3.</strong> Typescript-类</a></li><li class="chapter-item expanded "><a href="../preknowledge/interface-and-namespace.html"><strong aria-hidden="true">4.</strong> Typescript-接口和命名空间</a></li><li class="chapter-item expanded "><a href="../preknowledge/generics.html"><strong aria-hidden="true">5.</strong> Typescript-泛型</a></li><li class="chapter-item expanded "><a href="../preknowledge/declaration-files.html"><strong aria-hidden="true">6.</strong> Typescript-声明文件</a></li><li class="chapter-item expanded affix "><li class="part-title">第一步</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../get-started/your-first-extension.html"><strong aria-hidden="true">7.</strong> 你的第一个插件</a></li><li class="chapter-item expanded "><a href="../get-started/extension-anatomy.html"><strong aria-hidden="true">8.</strong> 解析插件结构</a></li><li class="chapter-item expanded "><a href="../get-started/wrapping-up.html"><strong aria-hidden="true">9.</strong> 小结</a></li><li class="chapter-item expanded affix "><li class="part-title">开发插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../working-with-extensions/testing-extension.html"><strong aria-hidden="true">10.</strong> 测试插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/publish-extension.html"><strong aria-hidden="true">11.</strong> 发布插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/bundling-extension.html"><strong aria-hidden="true">12.</strong> 打包插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/continuous-integration.html"><strong aria-hidden="true">13.</strong> 持集成</a></li><li class="chapter-item expanded affix "><li class="part-title">插件功能</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-capabilities/index.html"><strong aria-hidden="true">14.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/common-capabilities.html"><strong aria-hidden="true">15.</strong> 常用功能</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/theming.html"><strong aria-hidden="true">16.</strong> 主题</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/extending-workbench.html"><strong aria-hidden="true">17.</strong> 扩展工作台</a></li><li class="chapter-item expanded affix "><li class="part-title">插件指南</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-guides/index.html"><strong aria-hidden="true">18.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-guides/command.html"><strong aria-hidden="true">19.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../extension-guides/color-theme.html"><strong aria-hidden="true">20.</strong> 色彩主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/file-icon-theme.html"><strong aria-hidden="true">21.</strong> 文件图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/product-icon-theme.html"><strong aria-hidden="true">22.</strong> 产品图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/tree-view.html"><strong aria-hidden="true">23.</strong> 树视图</a></li><li class="chapter-item expanded "><a href="../extension-guides/webview.html"><strong aria-hidden="true">24.</strong> Webview</a></li><li class="chapter-item expanded "><a href="../extension-guides/notebook.html"><strong aria-hidden="true">25.</strong> 笔记本</a></li><li class="chapter-item expanded "><a href="../extension-guides/virtual-documents.html"><strong aria-hidden="true">26.</strong> 虚拟文档</a></li><li class="chapter-item expanded "><a href="../extension-guides/task-provider.html"><strong aria-hidden="true">27.</strong> 任务</a></li><li class="chapter-item expanded "><a href="../extension-guides/scm-provider.html"><strong aria-hidden="true">28.</strong> 源控制</a></li><li class="chapter-item expanded "><a href="../extension-guides/debugger-extension.html"><strong aria-hidden="true">29.</strong> 调试器插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/markdown-extension.html"><strong aria-hidden="true">30.</strong> Markdown插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-editors.html"><strong aria-hidden="true">31.</strong> 自定义编辑器</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-data-extension.html"><strong aria-hidden="true">32.</strong> 自定义数据插件</a></li><li class="chapter-item expanded affix "><li class="part-title">语言插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../language-extensions/index.html"><strong aria-hidden="true">33.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../language-extensions/syntax-highlight-guide.html"><strong aria-hidden="true">34.</strong> 语法高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/semantic-highlight-guide.html"><strong aria-hidden="true">35.</strong> 语义高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/snippet-guide.html"><strong aria-hidden="true">36.</strong> 代码片段</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-configuration-guide.html"><strong aria-hidden="true">37.</strong> 语言配置</a></li><li class="chapter-item expanded "><a href="../language-extensions/programmatic-language-features.html"><strong aria-hidden="true">38.</strong> 程序性语言特性</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-server-extension-guide.html"><strong aria-hidden="true">39.</strong> 语言服务器</a></li><li class="chapter-item expanded "><a href="../language-extensions/embedded-languages.html"><strong aria-hidden="true">40.</strong> 嵌入语言</a></li><li class="chapter-item expanded affix "><li class="part-title">进阶主题</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../advanced-topics/extension-host.html"><strong aria-hidden="true">41.</strong> 插件主机</a></li><li class="chapter-item expanded "><a href="../advanced-topics/remote-extensions.html"><strong aria-hidden="true">42.</strong> 远程开发</a></li><li class="chapter-item expanded "><a href="../advanced-topics/using-proposed-api.html"><strong aria-hidden="true">43.</strong> 使用不稳定的API</a></li><li class="chapter-item expanded affix "><li class="part-title">️️参考</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../references/vscode-api.html"><strong aria-hidden="true">44.</strong> VS Code API</a></li><li class="chapter-item expanded "><a href="../references/contribution-points.html" class="active"><strong aria-hidden="true">45.</strong> 发布内容配置</a></li><li class="chapter-item expanded "><a href="../references/activation-events.html"><strong aria-hidden="true">46.</strong> 激活事件</a></li><li class="chapter-item expanded "><a href="../references/extension-manifest.html"><strong aria-hidden="true">47.</strong> 插件清单</a></li><li class="chapter-item expanded "><a href="../references/commands.html"><strong aria-hidden="true">48.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../references/when-clause-contexts.html"><strong aria-hidden="true">49.</strong> when 子句上下文</a></li><li class="chapter-item expanded "><a href="../references/theme-color.html"><strong aria-hidden="true">50.</strong> 主题色彩</a></li><li class="chapter-item expanded "><a href="../references/icons-in-labels.html"><strong aria-hidden="true">51.</strong> 标签中的图标</a></li><li class="chapter-item expanded "><a href="../references/document-selector.html"><strong aria-hidden="true">52.</strong> 文档选择器</a></li><li class="chapter-item expanded "><a href="../references/extension-guidelines.html"><strong aria-hidden="true">53.</strong> 插件开发准则</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">VS Code 插件开发文档</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="发布内容配置"><a class="header" href="#发布内容配置">发布内容配置</a></h1>
+<p>发布内容配置（即VS Code为插件扩展提供的配置项）是<code>pacakge.json</code><a href="https://code.visualstudio.com/api/references/extension-manifest">插件清单</a>的<code>contributes</code>字段，你可以在其中注册各种配置项扩展VS Code的能力。下面是目前可用的配置项列表：</p>
+<ul>
+<li><a href="#%E5%8F%91%E5%B8%83%E5%86%85%E5%AE%B9%E9%85%8D%E7%BD%AE">发布内容配置</a>
+<ul>
+<li><a href="#-contributesconfiguration">## contributes.configuration</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesconfigurationdefaults">## contributes.configurationDefaults</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-1">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributescommands">## contributes.commands</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-2">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesmenus">## contributes.menus</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-3">示例</a></li>
+<li><a href="#%E8%AE%A9%E8%8F%9C%E5%8D%95%E9%A1%B9%E5%8F%AA%E6%98%BE%E7%A4%BA%E5%9C%A8%E5%91%BD%E4%BB%A4%E9%9D%A2%E6%9D%BF%E4%B8%AD">让菜单项只显示在命令面板中</a></li>
+<li><a href="#%E5%88%86%E7%BB%84%E6%8E%92%E5%BA%8F">分组排序</a></li>
+<li><a href="#%E7%BB%84%E5%86%85%E6%8E%92%E5%BA%8F">组内排序</a></li>
+</ul>
+</li>
+<li><a href="#-contributeskeybindings">## contributes.keybindings</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-4">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributeslanguages">## contributes.languages</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-5">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesdebuggers">## contributes.debuggers</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-6">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesbreakpoints">## contributes.breakpoints</a></li>
+<li><a href="#-contributesgrammars">## contributes.grammars</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-7">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesthemes">## contributes.themes</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-8">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributessnippets">## contributes.snippets</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-9">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesjsonvalidation">## contributes.jsonValidation</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-10">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesviews">## contributes.views</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-11">示例</a></li>
+</ul>
+</li>
+<li><a href="#contributesviewswelcome">contributes.viewsWelcome</a></li>
+<li><a href="#-contributesviewscontainers">## contributes.viewsContainers</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-12">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesproblemmatchers">## contributes.problemMatchers</a>
+<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B-13">示例</a></li>
+</ul>
+</li>
+<li><a href="#-contributesproblempatterns">## contributes.problemPatterns</a></li>
+<li><a href="#-contributestaskdefinitions">## contributes.taskDefinitions</a></li>
+<li><a href="#-contributescolors">## contributes.colors</a></li>
+<li><a href="#-contributestypescriptserverplugins">## contributes.typescriptServerPlugins</a></li>
+<li><a href="#%E4%B8%8B%E4%B8%80%E6%AD%A5">下一步</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="contributesconfiguration"><a class="header" href="#contributesconfiguration">contributes.configuration</a></h2>
+<hr />
+<p>在configuration中配置的内容会暴露给用户，用户可以从“用户设置”和“工作区设置”中修改你暴露的选项。</p>
+<p>configuration是JSON格式的键值对，用户会在修改设置时获得对应的提示和更好的体验。</p>
+<p>你可以用<code>vscode.workspace.getConfiguration('myExtension')</code>读取配置值。</p>
+<p>?&gt; 小提示：配置<code>markdownDescription</code>比配置<code>description</code>更好，它能呈现Markdown格式的文档。</p>
+<h4 id="示例"><a class="header" href="#示例">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;configuration&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;title&quot;: &quot;TypeScript configuration&quot;,
+        &quot;properties&quot;: {
+            &quot;typescript.useCodeSnippetsOnMethodSuggest&quot;: {
+                &quot;type&quot;: &quot;boolean&quot;,
+                &quot;default&quot;: false,
+                &quot;description&quot;: &quot;Complete functions with their parameter signature.&quot;
+            },
+            &quot;typescript.tsdk&quot;: {
+                &quot;type&quot;: [&quot;string&quot;, &quot;null&quot;],
+                &quot;default&quot;: null,
+                &quot;description&quot;: &quot;Specifies the folder path containing the tsserver and lib*.d.ts files to use.&quot;
+            }
+        }
+    }
+}
+</code></pre>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/configuration.png" alt="configuration" /></p>
+<h2 id="contributesconfigurationdefaults"><a class="header" href="#contributesconfigurationdefaults">contributes.configurationDefaults</a></h2>
+<hr />
+<p>为特定的语言配置编辑器的默认值，修改这个配置会覆盖编辑器已经为语言提供的默认配置。</p>
+<p>下面的示例是修改<code>markdown</code>语言的默认配置。</p>
+<h4 id="示例-1"><a class="header" href="#示例-1">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;configurationDefaults&quot;: {
+        &quot;[markdown]&quot;: {
+            &quot;editor.wordWrap&quot;: &quot;on&quot;,
+            &quot;editor.quickSuggestions&quot;: false
+        }
+    }
+}
+</code></pre>
+<h2 id="contributescommands"><a class="header" href="#contributescommands">contributes.commands</a></h2>
+<hr />
+<p>设置命令标题和命令体，随后这个命令会显示在<strong>命令面板</strong>中。你也可以加上<code>category</code>前缀，在<strong>命令面板</strong>中会以分类显示。</p>
+<p>?&gt;<strong>注意：<strong>当调用命令时（通过组合键或者在</strong>命令面板</strong>中调用），VS Code会触发激活事件<code>onCommand:${command}</code>。</p>
+<p>下面的示例是修改<code>markdown</code>语言的默认配置。</p>
+<h4 id="示例-2"><a class="header" href="#示例-2">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;commands&quot;: [{
+        &quot;command&quot;: &quot;extension.sayHello&quot;,
+        &quot;title&quot;: &quot;Hello World&quot;,
+        &quot;category&quot;: &quot;Hello&quot;
+    }]
+}
+</code></pre>
+<p>?&gt; <strong>提示</strong>: 想了解更多的有关于在VS Code插件开发中使用命令, 请参阅<a href="/extension-guides/command">命令</a>章节</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/commands.png" alt="commands" /></p>
+<h2 id="contributesmenus"><a class="header" href="#contributesmenus">contributes.menus</a></h2>
+<hr />
+<p>为编辑器或者文件管理器设置命令的<em>菜单项</em>。菜单项至少包含1️⃣选中时调用的命令和2️⃣何时显示这个菜单项的时机。显示菜单的时机由<code>when</code>键定义，而对应的值语法需要参考键值绑定的<a href="https://github.com/Microsoft/vscode-docs/blob/master/docs/getstarted/keybindings.md#when-clause-contexts">when语法</a>。</p>
+<p><code>command</code>键则是必须的。可选的命令使用<code>alt</code>定义，当你按下ALT键时，菜单中会显示对应的菜单项。</p>
+<p>最后，<code>group</code>属性定义了菜单的分组。<code>navigation</code>值不同于普通的<code>group</code>值，一旦设置这个值就会总是显示在菜单的最顶端。</p>
+<p>当前插件创作者可以配置的菜单的地方有：</p>
+<ul>
+<li>全局命令面板 - <code>commandPalette</code></li>
+<li>资源管理器上下文菜单 - <code>explorer/context</code></li>
+<li>编辑器上下文菜单 - <code>editor/context</code></li>
+<li>编辑器标题栏 - <code>editor/title</code></li>
+<li>编辑器标题上下文菜单 - <code>editor/title/context</code></li>
+<li>调试栈视图的上下文菜单 - <code>debug/callstack/context</code></li>
+<li><a href="extensibility-reference/api-scm.html#%E8%8F%9C%E5%8D%95">SCM 标题菜单</a> - <code>scm/title</code></li>
+<li><a href="extensibility-reference/api-scm.html#%E8%8F%9C%E5%8D%95">SCM 资源组</a> - <code>scm/resourceGroup/context</code></li>
+<li><a href="extensibility-reference/api-scm.html#%E8%8F%9C%E5%8D%95">SCM 资源</a> - <code>scm/resource/context</code></li>
+<li><a href="extensibility-reference/api-scm.html#%E8%8F%9C%E5%8D%95">SCM 改变标题</a> - <code>scm/change/title</code></li>
+<li><a href="#contributesviews">视图的标题菜单</a> - <code>view/title</code></li>
+<li><a href="#contributesviews">视图项的菜单</a> - <code>view/item/context</code></li>
+</ul>
+<p>?&gt;**注意：**当菜单中的命令被调用，VS Code会将当前选中资源作为参数传给调用的命令。比方说，资源管理器的菜单被触发，选中资源的URI会作为参数，编辑器中的菜单项被触发，则将当前文件的URI作为参数传入。</p>
+<p>关于<em>标题</em>还有一点要说，命令还可以定义图标，VS Code会显示在编辑器的标题菜单栏中。</p>
+<h4 id="示例-3"><a class="header" href="#示例-3">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;menus&quot;: {
+        &quot;editor/title&quot;: [{
+            &quot;when&quot;: &quot;resourceLangId == markdown&quot;,
+            &quot;command&quot;: &quot;markdown.showPreview&quot;,
+            &quot;alt&quot;: &quot;markdown.showPreviewToSide&quot;,
+            &quot;group&quot;: &quot;navigation&quot;
+        }]
+    }
+}
+</code></pre>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/menus.png" alt="menus" /></p>
+<h4 id="让菜单项只显示在命令面板中"><a class="header" href="#让菜单项只显示在命令面板中">让菜单项只显示在命令面板中</a></h4>
+<p>注册的命令默认显示在<strong>命令面板</strong>中。要想控制命令的可见性，我们提供了一个<code>commandPalette</code>菜单配置，在这个配置中，你可以定义一个<code>when</code>控制是否在<strong>命令菜单</strong>中显示。</p>
+<p>下面的片段只在编辑器中选中了什么东西的时候才会在<strong>命令面板</strong>中显示出‘Hello World’：</p>
+<pre><code class="language-json">&quot;commands&quot;: [{
+    &quot;command&quot;: &quot;extension.sayHello&quot;,
+    &quot;title&quot;: &quot;Hello World&quot;
+}],
+&quot;menus&quot;: {
+    &quot;commandPalette&quot;: [{
+        &quot;command&quot;: &quot;extension.sayHello&quot;,
+        &quot;when&quot;: &quot;editorHasSelection&quot;
+    }]
+}
+</code></pre>
+<h4 id="分组排序"><a class="header" href="#分组排序">分组排序</a></h4>
+<p>菜单项可以通过组来分类。根据下列默认规则，然后按照字母排序，</p>
+<p><strong>编辑器上下文菜单</strong>默认有这些分组：</p>
+<ul>
+<li><code>navigation</code> - <code>navigation</code>组始终在最上方。</li>
+<li><code>1_modification</code> - 紧接上一个组，这个组包含可以修改你代码的命令。</li>
+<li><code>9_cutcopypaste</code> - 然后是基础编辑命令。</li>
+<li><code>z_commands</code> - 最后一个分组则是命令面板入口。</li>
+</ul>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/groupSorting.png" alt="groupSorting" /></p>
+<p><strong>资源管理器上下文菜单</strong>默认有下列分组：</p>
+<ul>
+<li><code>navigation</code> -  在VS Code中导航的相关命令。<code>navigation</code>组始终在最上方。</li>
+<li><code>2_workspace</code> - 和工作区操作相关的命令。</li>
+<li><code>3_compare</code> - 比较文件和diff相关的命令。</li>
+<li><code>4_search</code> - 在搜索视图中和搜索相关的命令。</li>
+<li><code>5_cutcopypaste</code> - 和剪切、复制、粘贴文件相关的命令。</li>
+<li><code>7_modification</code> - 修改文件的相关命令。</li>
+</ul>
+<p><strong>编辑器标签菜单</strong>默认有下列分组</p>
+<ul>
+<li>1_close - 和关闭编辑器相关的命令。</li>
+<li>3_preview - 和固定编辑器相关的命令。</li>
+</ul>
+<p><strong>编辑器标题菜单</strong>默认有下列分组</p>
+<ul>
+<li>1_diff - diff编辑器相关的命令。</li>
+<li>3_open - 打开编辑器的相关命令。</li>
+<li>5_close - 和关闭编辑器相关的命令。</li>
+</ul>
+<h4 id="组内排序"><a class="header" href="#组内排序">组内排序</a></h4>
+<p>组内的菜单顺序取决于标题或者<em>序号属性</em>。菜单的组内顺序由<code>@&lt;number&gt;</code>加到<code>group</code>值的后面得以确定：</p>
+<pre><code class="language-json">&quot;editor/title&quot;: [{
+    &quot;when&quot;: &quot;editorHasSelection&quot;,
+    &quot;command&quot;: &quot;extension.Command&quot;,
+    &quot;group&quot;: &quot;myGroup@1&quot;
+}]
+</code></pre>
+<h2 id="contributeskeybindings"><a class="header" href="#contributeskeybindings">contributes.keybindings</a></h2>
+<hr />
+<p>这个配置确定了用户输入按键组合时的触发规则。在<a href="https://code.visualstudio.com/docs/getstarted/keybindings">快捷键绑定</a>中，你可以了解更加细节的东西。</p>
+<p>配置快捷键绑定会使<em>默认键盘快捷方式</em>中显示你的规则，每一处和命令相关的UI部分也会显示你添加的快捷键组合。</p>
+<p>?&gt;<strong>注意</strong>因为VS Code支持Windows，macOS和Linux平台，而</p>
+<h4 id="示例-4"><a class="header" href="#示例-4">示例</a></h4>
+<p>Windows和Linux下使用<code>Ctrl+F1</code>，macOS下使用<code>Cmd+F1</code>调用<code>&quot;extension.sayHello&quot;</code>命令：</p>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;keybindings&quot;: [{
+        &quot;command&quot;: &quot;extension.sayHello&quot;,
+        &quot;key&quot;: &quot;ctrl+f1&quot;,
+        &quot;mac&quot;: &quot;cmd+f1&quot;,
+        &quot;when&quot;: &quot;editorTextFocus&quot;
+    }]
+}
+</code></pre>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/keybindings.png" alt="keybindings" /></p>
+<h2 id="contributeslanguages"><a class="header" href="#contributeslanguages">contributes.languages</a></h2>
+<hr />
+<p>配置一门语言，引入一门新的语言或者加强VS Code已有的语言支持。</p>
+<p>在这部分内容中，一个语言必须要有一个标识符（identifier）关联到文件上（查看 <code>TextDocument.getLanguageId()</code>）。</p>
+<p>VS Code提供三种文件应该关联哪种语言的方式。每种方式都可以可以“单独”加强：</p>
+<ol>
+<li>插件的文件名</li>
+<li>文件名</li>
+<li>文件内的首行</li>
+</ol>
+<p>用户打开文件后，三种规则都会使用，然后确定语言。接着VS Code就会触发激活事件<code>onLanguage:${language}</code>（比如：下面的<code>onLanguage:python</code>例子）</p>
+<p><code>aliases</code>属性包含着这门语言的可读性名称。这个列表的第一项会作为语言标签（在VS Code右下角状态栏显示）。</p>
+<p><code>configuration</code>属性确定了语言配置文件的路径。路径是指相对插件文件夹的路径，通常是<code>./language-configuration.json</code>，这个文件是JSON格式的，包含着下列可配置属性：</p>
+<ul>
+<li><code>comments</code> - 定义了注释的符号
+<ul>
+<li><code>blockComment</code> - 用于标识块注释的起始和结束token。被'Toggle Block Comment'使用</li>
+<li><code>lineComment</code> - 用于标识行注释的起始token。被'Add Line Comment'使用</li>
+</ul>
+</li>
+<li><code>brackets</code> - 定义括号，同时也会影响括号内的代码缩进。进入新的一行时，被编辑器用来确定或是更正新的缩进距离</li>
+<li><code>autoClosingPairs</code> - 为<em>自动闭合功能</em>定义某个符号的开闭符（open and close symbols）。<em>开符号</em>输入后，编辑器会自动插入<em>闭符号</em>。使用<code>notIn</code>参数，关闭字符串或者注释中的<em>符号对</em></li>
+<li><code>surroundingPairs</code> - 定义选中文本的开闭符号</li>
+<li><code>folding</code> - 定义编辑器中的代码应何时、应怎么样折叠
+<ul>
+<li><code>offSide</code> - 和一下个缩进块之间的代码块尾部的空行（用于基于缩进的语言，如Python or F#）</li>
+<li><code>markers</code> - 使用正则自定义代码中的折叠区域标识符</li>
+</ul>
+</li>
+<li><code>wordPattern</code> - 使用正则匹配编程语言中哪些词应该是单个词</li>
+</ul>
+<p>如果你的语言配置文件是<code>language-configuration.json</code>，或者以这样的字符串结尾的，VS Code就会提供校验和编辑支持。</p>
+<h4 id="示例-5"><a class="header" href="#示例-5">示例</a></h4>
+<pre><code class="language-json">...
+&quot;contributes&quot;: {
+    &quot;languages&quot;: [{
+        &quot;id&quot;: &quot;python&quot;,
+        &quot;extensions&quot;: [ &quot;.py&quot; ],
+        &quot;aliases&quot;: [ &quot;Python&quot;, &quot;py&quot; ],
+        &quot;filenames&quot;: [ ... ],
+        &quot;firstLine&quot;: &quot;^#!/.*\\bpython[0-9.-]*\\b&quot;,
+        &quot;configuration&quot;: &quot;./language-configuration.json&quot;
+    }]
+}
+</code></pre>
+<p>language-configuration.json</p>
+<pre><code class="language-json">{
+    &quot;comments&quot;: {
+        &quot;lineComment&quot;: &quot;//&quot;,
+        &quot;blockComment&quot;: [ &quot;/*&quot;, &quot;*/&quot; ]
+    },
+    &quot;brackets&quot;: [
+        [&quot;{&quot;, &quot;}&quot;],
+        [&quot;[&quot;, &quot;]&quot;],
+        [&quot;(&quot;, &quot;)&quot;]
+    ],
+    &quot;autoClosingPairs&quot;: [
+        [&quot;{&quot;, &quot;}&quot;],
+        [&quot;[&quot;, &quot;]&quot;],
+        [&quot;(&quot;, &quot;)&quot;],
+        { &quot;open&quot;: &quot;'&quot;, &quot;close&quot;: &quot;'&quot;, &quot;notIn&quot;: [&quot;string&quot;, &quot;comment&quot;] },
+        { &quot;open&quot;: &quot;/**&quot;, &quot;close&quot;: &quot; */&quot;, &quot;notIn&quot;: [&quot;string&quot;] }
+    ],
+    &quot;surroundingPairs&quot;: [
+        [&quot;{&quot;, &quot;}&quot;],
+        [&quot;[&quot;, &quot;]&quot;],
+        [&quot;(&quot;, &quot;)&quot;],
+        [&quot;&lt;&quot;, &quot;&gt;&quot;],
+        [&quot;'&quot;, &quot;'&quot;]
+    ],
+    &quot;folding&quot;: {
+        &quot;offSide&quot;: true,
+        &quot;markers&quot;: {
+            &quot;start&quot;: &quot;^\\s*//#region&quot;,
+            &quot;end&quot;: &quot;^\\s*//#endregion&quot;
+        }
+    },
+    &quot;wordPattern&quot;: &quot;(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&amp;\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\&quot;\\,\\.\\&lt;\\&gt;\\/\\?\\s]+)&quot;
+}
+</code></pre>
+<h2 id="contributesdebuggers"><a class="header" href="#contributesdebuggers">contributes.debuggers</a></h2>
+<hr />
+<p>配置VS Code的调试器，调试器配置有下列属性：</p>
+<ul>
+<li><code>type</code> 用于加载配置的调试器唯一标识——ID。</li>
+<li><code>label</code> 会在UI中显示的调试器名称。</li>
+<li><code>program</code> 调试适配的路径，调试适配通过VS Code debug protocol连接到真正的调试器或者运行时。</li>
+<li><code>runtime</code> 如果调试适配器的路径不是可执行程序，那么就会用到这个运行时。</li>
+<li><code>configurationAttributes</code> 调试器的启动配置参数。</li>
+<li><code>initialConfigurations</code> 列出了初始化launch.json需要的加载配置。</li>
+<li><code>configurationSnippets</code> 列出了编辑launch.json文件时可以提供的加载配置智能提示。</li>
+<li><code>variables</code> 引入替代变量，并绑定到调试器插件实现的命令上。</li>
+<li><code>languages</code> 调试插件会使用“默认调试器”的语言</li>
+<li><code>adapterExecutableCommand</code> 调试适配器执行路径和参数动态计算的命令。命令返回的格式如下：
+<pre><code class="language-json">command: &quot;&lt;executable&gt;&quot;,
+args: [ &quot;&lt;argument1&gt;&quot;, &quot;&lt;argument2&gt;&quot;, ... ]
+</code></pre>
+<code>command</code>属性必须是一个可执行程序的<strong>绝对路径</strong>，或者是通过PATH环境变量可以查找到可执行程序的名称。使用特殊值<code>node</code>，则会映射到VS Code内建的node运行时，而不会在PATH中查找。</li>
+</ul>
+<h4 id="示例-6"><a class="header" href="#示例-6">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;debuggers&quot;: [{
+        &quot;type&quot;: &quot;node&quot;,
+        &quot;label&quot;: &quot;Node Debug&quot;,
+
+        &quot;program&quot;: &quot;./out/node/nodeDebug.js&quot;,
+        &quot;runtime&quot;: &quot;node&quot;,
+
+        &quot;languages&quot;: [&quot;javascript&quot;, &quot;typescript&quot;, &quot;javascriptreact&quot;, &quot;typescriptreact&quot;],
+
+        &quot;configurationAttributes&quot;: {
+            &quot;launch&quot;: {
+                &quot;required&quot;: [ &quot;program&quot; ],
+                &quot;properties&quot;: {
+                    &quot;program&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;description&quot;: &quot;The program to debug.&quot;
+                    }
+                }
+            }
+        },
+
+        &quot;initialConfigurations&quot;: [{
+            &quot;type&quot;: &quot;node&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;name&quot;: &quot;Launch Program&quot;,
+            &quot;program&quot;: &quot;${workspaceFolder}/app.js&quot;
+        }],
+
+        &quot;configurationSnippets&quot;: [
+            {
+                &quot;label&quot;: &quot;Node.js: Attach Configuration&quot;,
+                &quot;description&quot;: &quot;A new configuration for attaching to a running node program.&quot;,
+                &quot;body&quot;: {
+                    &quot;type&quot;: &quot;node&quot;,
+                    &quot;request&quot;: &quot;attach&quot;,
+                    &quot;name&quot;: &quot;${2:Attach to Port}&quot;,
+                    &quot;port&quot;: 9229
+                }
+            }
+        ],
+
+        &quot;variables&quot;: {
+            &quot;PickProcess&quot;: &quot;extension.node-debug.pickNodeProcess&quot;
+        }
+    }]
+}
+</code></pre>
+<p>想要完整地学习<code>debugger</code>，移步至<a href="/extension-authoring/example-debug-adapter.html">调试器</a></p>
+<h2 id="contributesbreakpoints"><a class="header" href="#contributesbreakpoints">contributes.breakpoints</a></h2>
+<hr />
+<p>通常调试器插件会有<code>contributes.breakpoints</code>入口，插件可以在这里面设置哪些语言可以设置断点。</p>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;breakpoints&quot;: [
+        {
+            &quot;language&quot;: &quot;javascript&quot;
+        },
+        {
+            &quot;language&quot;: &quot;javascriptreact&quot;
+        }
+    ]
+}
+</code></pre>
+<h2 id="contributesgrammars"><a class="header" href="#contributesgrammars">contributes.grammars</a></h2>
+<hr />
+<p>为一门语言配置TextMate语法。你必须提供应用语法的<code>language</code>，TextMate的<code>scopeName</code>确定了语法和文件路径。</p>
+<p>!&gt;**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。</p>
+<h4 id="示例-7"><a class="header" href="#示例-7">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;grammars&quot;: [{
+        &quot;language&quot;: &quot;markdown&quot;,
+        &quot;scopeName&quot;: &quot;text.html.markdown&quot;,
+        &quot;path&quot;: &quot;./syntaxes/markdown.tmLanguage.json&quot;,
+        &quot;embeddedLanguages&quot;: {
+            &quot;meta.embedded.block.frontmatter&quot;: &quot;yaml&quot;,
+            ...
+        }
+    }]
+}
+</code></pre>
+<p>查看<a href="/language-extensions/syntax-highlight-guide">语法高亮指南</a>学习更多从现有的语法高亮插件迁移的内容。</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/grammars.png" alt="grammars" /></p>
+<h2 id="contributesthemes"><a class="header" href="#contributesthemes">contributes.themes</a></h2>
+<hr />
+<p>为VS Code添加TextMate主题。你必须添加一个label，指定这个主题是dark还是light的（以便VS Code根据你的主题调整界面），当然还需要加上目标文件路径（XML plist 格式）。</p>
+<p>!&gt;**注意：**包含语法的文件必须是JSON（以.json结尾的文件）或者XML的plist格式文件。</p>
+<h4 id="示例-8"><a class="header" href="#示例-8">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;themes&quot;: [{
+        &quot;label&quot;: &quot;Monokai&quot;,
+        &quot;uiTheme&quot;: &quot;vs-dark&quot;,
+        &quot;path&quot;: &quot;./themes/Monokai.tmTheme&quot;
+    }]
+}
+</code></pre>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/themes.png" alt="themes" /></p>
+<p>查看<a href="docs/extension-authoring/themes-snippets-colorizers.html">改变色彩主题</a>学习使用<a href="/extension-authoring/extension-generator.html">yo code插件生成器</a>将TextMate.tmTheme文件快速打包成VS Code插件。</p>
+<h2 id="contributessnippets"><a class="header" href="#contributessnippets">contributes.snippets</a></h2>
+<hr />
+<p>为语言添加代码片段。<code>language</code>属性必须是<a href="https://code.visualstudio.com/docs/languages/identifiers">语言标识符</a>而<code>path</code>则必须是使用<a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets#_snippet-syntax">VS Code代码片段格式</a>的代码片段文件的相对路径。</p>
+<h4 id="示例-9"><a class="header" href="#示例-9">示例</a></h4>
+<p>下面是一个Go语言的代码片段：</p>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;snippets&quot;: [{
+        &quot;language&quot;: &quot;go&quot;,
+        &quot;path&quot;: &quot;./snippets/go.json&quot;
+    }]
+}
+</code></pre>
+<h2 id="contributesjsonvalidation"><a class="header" href="#contributesjsonvalidation">contributes.jsonValidation</a></h2>
+<hr />
+<p>为<code>json</code>文件添加校验器。<code>url</code>值可以是本地路径也可以是插件中的模式文件（schema file），或者是远程服务器的URL比如：<a href="http://schemastore.org/json">json schema</a></p>
+<h4 id="示例-10"><a class="header" href="#示例-10">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;jsonValidation&quot;: [{
+        &quot;fileMatch&quot;: &quot;.jshintrc&quot;,
+        &quot;url&quot;: &quot;http://json.schemastore.org/jshintrc&quot;
+    }]
+}
+</code></pre>
+<h2 id="contributesviews"><a class="header" href="#contributesviews">contributes.views</a></h2>
+<hr />
+<p>为VS Code 添加视图。你需要为视图指定唯一标识和名称。可以配置的属性如下：</p>
+<ul>
+<li><code>explorer</code>: 活动栏中的资源管理视图容器。</li>
+<li><code>scm</code>: 活动栏中的源代码管理(SCM) 视图容器。</li>
+<li><code>debug</code>: 活动栏中的调试视图容器。</li>
+<li><code>test</code>: 活动栏中的测试视图容器。</li>
+<li><a href="#contributesviewscontainers">Custom view containers</a> 由插件提供的自定义视图容器。</li>
+</ul>
+<p>当用户打开视图，VS Code会触发<code>onView:${viewId}</code>激活事件（比如：下面示例中的<code>onView:nodeDependencies</code>）。你也可以用<code>when</code>控制视图的可见性。</p>
+<h4 id="示例-11"><a class="header" href="#示例-11">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;views&quot;: {
+        &quot;explorer&quot;: [
+            {
+                &quot;id&quot;: &quot;nodeDependencies&quot;,
+                &quot;name&quot;: &quot;Node Dependencies&quot;,
+                &quot;when&quot;: &quot;workspaceHasPackageJSON&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/views.png" alt="views" /></p>
+<p>插件创作者应该通过<code>createTreeView</code>API提供的<a href="https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider">data provider</a>创建一个<a href="https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeView">TreeView</a>或者直接使用<code>registerTreeDataProvider</code>注册一个<a href="https://code.visualstudio.com/docs/extensionAPI/vscode-api#TreeDataProvider">data provider</a>。更多示例参考<a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample">这里</a></p>
+<h2 id="contributesviewswelcome"><a class="header" href="#contributesviewswelcome">contributes.viewsWelcome</a></h2>
+<p>给<a href="">自定义视图</a>配置欢迎内容。欢迎内容只能应用到空的树视图中。如果一个树视图中没有任何子树数据时，才是空的树视图。按照约定，任何单独成行的链接会被展示为按钮。你可以配置<code>view</code>属性，指定欢迎页展示的位置。欢迎页的可见性可通过<code>when</code>语句和变量值配置。展示在欢迎页的内容，可通过<code>contents</code>属性配置。</p>
+<pre><code class="language-json">{
+  &quot;contributes&quot;: {
+    &quot;viewsWelcome&quot;: [
+      {
+        &quot;view&quot;: &quot;scm&quot;,
+        &quot;contents&quot;: &quot;In order to use git features, you can open a folder containing a git repository or clone from a URL.\n[Open Folder](command:vscode.openFolder)\n[Clone Repository](command:git.clone)\nTo learn more about how to use git and source control in VS Code [read our docs](https://aka.ms/vscode-scm).&quot;,
+        &quot;when&quot;: &quot;config.git.enabled &amp;&amp; git.state == initialized &amp;&amp; workbenchState == empty&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<p><img src="https://code.visualstudio.com/assets/api/references/contribution-points/viewsWelcome.png" alt="Welcome content example" /></p>
+<p>一个视图可以展示多条欢迎内容，当出现这类场景时，VS Code 内置的内容会优先呈现，然后是插件提供欢迎内容，最后是来自其他插件的内容。</p>
+<h2 id="contributesviewscontainers"><a class="header" href="#contributesviewscontainers">contributes.viewsContainers</a></h2>
+<hr />
+<p>配置<a href="/references/contribution-points#contributesviews">自定义视图</a>的视图容器。你需要为视图指定唯一标识和标题和图标。目前你只可以配置活动栏（activitybar），下面的示例展示了活动栏中的<code>Package Explorer</code>视图容器应该如何配置。</p>
+<h4 id="示例-12"><a class="header" href="#示例-12">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;viewsContainers&quot;: {
+        &quot;activitybar&quot;: [
+            {
+                &quot;id&quot;: &quot;package-explorer&quot;,
+                &quot;title&quot;: &quot;Package Explorer&quot;,
+                &quot;icon&quot;: &quot;resources/package-explorer.svg&quot;
+            }
+        ]
+    },
+    &quot;views&quot;: {
+        &quot;package-explorer&quot;: [
+            {
+                &quot;id&quot;: &quot;package-dependencies&quot;,
+                &quot;name&quot;: &quot;Dependencies&quot;
+            },
+            {
+                &quot;id&quot;: &quot;package-outline&quot;,
+                &quot;name&quot;: &quot;Outline&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/references/images/contribution-points/custom-views-container.png" alt="custom-views-container" /></p>
+<p><strong>图标规格</strong></p>
+<ul>
+<li><code>Size:</code> 28x28的图标居中于50x40的视图块上。</li>
+<li><code>Color:</code> 图标应使用黑白单色。</li>
+<li><code>Format:</code> 虽然图片格式的图标都是可以的，但建议使用SVG图标。</li>
+<li><code>States:</code> 所有图标状态继承下列样式：</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>State</th><th>Opacity</th></tr></thead><tbody>
+<tr><td>Default</td><td>60%</td></tr>
+<tr><td>Hover</td><td>100%</td></tr>
+<tr><td>Active</td><td>100%</td></tr>
+</tbody></table>
+</div>
+<h2 id="contributesproblemmatchers"><a class="header" href="#contributesproblemmatchers">contributes.problemMatchers</a></h2>
+<hr />
+<p>配置问题定位器的模式。这些配置在输出面板和终端中都会有所体现，下面是一个配置了插件中的gcc编译器的问题定位器示例：</p>
+<h4 id="示例-13"><a class="header" href="#示例-13">示例</a></h4>
+<pre><code class="language-json">&quot;contributes&quot;: {
+    &quot;problemMatchers&quot;: [
+        {
+            &quot;name&quot;: &quot;gcc&quot;,
+            &quot;owner&quot;: &quot;cpp&quot;,
+            &quot;fileLocation&quot;: [&quot;relative&quot;, &quot;${workspaceFolder}&quot;],
+            &quot;pattern&quot;: {
+                &quot;regexp&quot;: &quot;^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$&quot;,
+                &quot;file&quot;: 1,
+                &quot;line&quot;: 2,
+                &quot;column&quot;: 3,
+                &quot;severity&quot;: 4,
+                &quot;message&quot;: 5
+            }
+        }
+    ]
+}
+</code></pre>
+<p>这个问题定位器现在可以通过名称引用<code>$gcc</code>在<code>task.json</code>中使用了，示例如下：</p>
+<pre><code class="language-json">{
+    &quot;version&quot;: &quot;2.0.0&quot;,
+    &quot;tasks&quot;: [
+        {
+            &quot;label&quot;: &quot;build&quot;,
+            &quot;command&quot;: &quot;gcc&quot;,
+            &quot;args&quot;: [&quot;-Wall&quot;, &quot;helloWorld.c&quot;, &quot;-o&quot;, &quot;helloWorld&quot;],
+            &quot;problemMatcher&quot;: &quot;$gcc&quot;
+        }
+    ]
+}
+</code></pre>
+<p>更多内容请查看：<a href="https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher">实现一个问题定位器</a></p>
+<h2 id="contributesproblempatterns"><a class="header" href="#contributesproblempatterns">contributes.problemPatterns</a></h2>
+<hr />
+<p>配置可以在问题定位器（见上）中可以使用的问题模式的名称。</p>
+<h2 id="contributestaskdefinitions"><a class="header" href="#contributestaskdefinitions">contributes.taskDefinitions</a></h2>
+<hr />
+<p>配置和定义一个object结构，定义系统中唯一的<em>配置任务</em>。任务定义最少需要一个<code>type</code>属性，不过通常需要更多的属性配置。
+在package.json文件中，<em>一个展示脚本的任务</em>看起来是这样的：</p>
+<pre><code class="language-json">&quot;taskDefinitions&quot;: [
+    {
+        &quot;type&quot;: &quot;npm&quot;,
+        &quot;required&quot;: [
+            &quot;script&quot;
+        ],
+        &quot;properties&quot;: {
+            &quot;script&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;description&quot;: &quot;The script to execute&quot;
+            },
+            &quot;path&quot;: {
+                &quot;type&quot;: &quot;string&quot;,
+                &quot;description&quot;: &quot;The path to the package.json file. If omitted the package.json in the root of the workspace folder is used.&quot;
+            }
+        }
+    }
+]
+</code></pre>
+<p>任务定义是JSON格式的，且包含<code>required</code>和<code>properties</code>两个属性。
+<code>type</code>属性定义了任务类型，如果上述例子变成：</p>
+<ul>
+<li><code>&quot;type&quot;: &quot;npm&quot;</code>要求任务与npm任务相关联</li>
+<li><code>&quot;required&quot;: [ &quot;script&quot; ]</code>其中<code>script</code>属性不可或缺。<code>path</code>属性变成可选。</li>
+<li><code>&quot;properties&quot;: {...}</code>：定义了其他属性和他们的类型</li>
+</ul>
+<p>当插件真的创建了一个任务，它需要传入一个与package.json中任务配置对应的<code>TaskDefinition</code>。对于<code>npm</code>任务来说，pacakge.json中的脚本应该是这样的：</p>
+<pre><code class="language-javascript">let task = new vscode.Task({ type: 'npm', script: 'test' }, ....);
+</code></pre>
+<h2 id="contributescolors"><a class="header" href="#contributescolors">contributes.colors</a></h2>
+<hr />
+<p>这些色彩可用于状态栏的编辑器装饰器。定义之后，用户可以在<code>workspace.colorCustomization</code>设置中自定义颜色，用户的主题会覆盖这些色值。</p>
+<pre><code class="language-json">&quot;contributes&quot;: {
+  &quot;colors&quot;: [{
+      &quot;id&quot;: &quot;superstatus.error&quot;,
+      &quot;description&quot;: &quot;Color for error message in the status bar.&quot;,
+      &quot;defaults&quot;: {
+          &quot;dark&quot;: &quot;errorForeground&quot;,
+          &quot;light&quot;: &quot;errorForeground&quot;,
+          &quot;highContrast&quot;: &quot;#010203&quot;
+      }
+  }]
+}
+</code></pre>
+<h2 id="contributestypescriptserverplugins"><a class="header" href="#contributestypescriptserverplugins">contributes.typescriptServerPlugins</a></h2>
+<hr />
+<p>配置VS Code的Javascript和Typescript支持的<a href="https://github.com/Microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin">Typescript 服务器插件</a>：</p>
+<pre><code class="language-json">&quot;contributes&quot;: {
+   &quot;typescriptServerPlugins&quot;: [
+      {
+        &quot;name&quot;: &quot;typescript-styled-plugin&quot;
+      }
+    ]
+}
+</code></pre>
+<p>上述例子配置了<a href="https://github.com/Microsoft/typescript-styled-plugin"><code>typescript-styled-plugin</code></a>，这个插件为Javascript和Typescript添加了风格化的组件智能提示。这个插件会从扩展插件中加载，而且必须在<code>dependency</code>中列明：</p>
+<pre><code class="language-json">{
+    &quot;dependencies&quot;: {
+        &quot;typescript-styled-plugin&quot;: &quot;*&quot;
+    }
+}
+</code></pre>
+<p>Typescript 服务器插件可以被所有Javascript和Typescript文件加载，只有当用户的工作区使用Typescript时才会激活。</p>
+<h2 id="下一步"><a class="header" href="#下一步">下一步</a></h2>
+<p>学习更多VS Code的扩展性模型，试着查看下面的主题吧：</p>
+<ul>
+<li><a href="/extensibility-reference/extension-manifest.html">插件配置清单</a> - VS Code的package.json插件配置清单参考</li>
+<li><a href="/extensibility-reference/activation-events.html">激活事件</a> - VS Code的激活事件参考</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../references/vscode-api.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../references/activation-events.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../references/vscode-api.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../references/activation-events.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

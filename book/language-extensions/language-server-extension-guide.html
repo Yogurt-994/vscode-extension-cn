@@ -1,0 +1,1033 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>语言服务器 - VS Code 插件开发文档</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">预备知识</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../preknowledge/first-step.html"><strong aria-hidden="true">1.</strong> 非JS开发者的第一步</a></li><li class="chapter-item expanded "><a href="../preknowledge/variable-and-type.html"><strong aria-hidden="true">2.</strong> Typescript-变量和类型</a></li><li class="chapter-item expanded "><a href="../preknowledge/class.html"><strong aria-hidden="true">3.</strong> Typescript-类</a></li><li class="chapter-item expanded "><a href="../preknowledge/interface-and-namespace.html"><strong aria-hidden="true">4.</strong> Typescript-接口和命名空间</a></li><li class="chapter-item expanded "><a href="../preknowledge/generics.html"><strong aria-hidden="true">5.</strong> Typescript-泛型</a></li><li class="chapter-item expanded "><a href="../preknowledge/declaration-files.html"><strong aria-hidden="true">6.</strong> Typescript-声明文件</a></li><li class="chapter-item expanded affix "><li class="part-title">第一步</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../get-started/your-first-extension.html"><strong aria-hidden="true">7.</strong> 你的第一个插件</a></li><li class="chapter-item expanded "><a href="../get-started/extension-anatomy.html"><strong aria-hidden="true">8.</strong> 解析插件结构</a></li><li class="chapter-item expanded "><a href="../get-started/wrapping-up.html"><strong aria-hidden="true">9.</strong> 小结</a></li><li class="chapter-item expanded affix "><li class="part-title">开发插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../working-with-extensions/testing-extension.html"><strong aria-hidden="true">10.</strong> 测试插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/publish-extension.html"><strong aria-hidden="true">11.</strong> 发布插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/bundling-extension.html"><strong aria-hidden="true">12.</strong> 打包插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/continuous-integration.html"><strong aria-hidden="true">13.</strong> 持集成</a></li><li class="chapter-item expanded affix "><li class="part-title">插件功能</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-capabilities/index.html"><strong aria-hidden="true">14.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/common-capabilities.html"><strong aria-hidden="true">15.</strong> 常用功能</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/theming.html"><strong aria-hidden="true">16.</strong> 主题</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/extending-workbench.html"><strong aria-hidden="true">17.</strong> 扩展工作台</a></li><li class="chapter-item expanded affix "><li class="part-title">插件指南</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-guides/index.html"><strong aria-hidden="true">18.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-guides/command.html"><strong aria-hidden="true">19.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../extension-guides/color-theme.html"><strong aria-hidden="true">20.</strong> 色彩主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/file-icon-theme.html"><strong aria-hidden="true">21.</strong> 文件图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/product-icon-theme.html"><strong aria-hidden="true">22.</strong> 产品图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/tree-view.html"><strong aria-hidden="true">23.</strong> 树视图</a></li><li class="chapter-item expanded "><a href="../extension-guides/webview.html"><strong aria-hidden="true">24.</strong> Webview</a></li><li class="chapter-item expanded "><a href="../extension-guides/notebook.html"><strong aria-hidden="true">25.</strong> 笔记本</a></li><li class="chapter-item expanded "><a href="../extension-guides/virtual-documents.html"><strong aria-hidden="true">26.</strong> 虚拟文档</a></li><li class="chapter-item expanded "><a href="../extension-guides/task-provider.html"><strong aria-hidden="true">27.</strong> 任务</a></li><li class="chapter-item expanded "><a href="../extension-guides/scm-provider.html"><strong aria-hidden="true">28.</strong> 源控制</a></li><li class="chapter-item expanded "><a href="../extension-guides/debugger-extension.html"><strong aria-hidden="true">29.</strong> 调试器插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/markdown-extension.html"><strong aria-hidden="true">30.</strong> Markdown插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-editors.html"><strong aria-hidden="true">31.</strong> 自定义编辑器</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-data-extension.html"><strong aria-hidden="true">32.</strong> 自定义数据插件</a></li><li class="chapter-item expanded affix "><li class="part-title">语言插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../language-extensions/index.html"><strong aria-hidden="true">33.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../language-extensions/syntax-highlight-guide.html"><strong aria-hidden="true">34.</strong> 语法高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/semantic-highlight-guide.html"><strong aria-hidden="true">35.</strong> 语义高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/snippet-guide.html"><strong aria-hidden="true">36.</strong> 代码片段</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-configuration-guide.html"><strong aria-hidden="true">37.</strong> 语言配置</a></li><li class="chapter-item expanded "><a href="../language-extensions/programmatic-language-features.html"><strong aria-hidden="true">38.</strong> 程序性语言特性</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-server-extension-guide.html" class="active"><strong aria-hidden="true">39.</strong> 语言服务器</a></li><li class="chapter-item expanded "><a href="../language-extensions/embedded-languages.html"><strong aria-hidden="true">40.</strong> 嵌入语言</a></li><li class="chapter-item expanded affix "><li class="part-title">进阶主题</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../advanced-topics/extension-host.html"><strong aria-hidden="true">41.</strong> 插件主机</a></li><li class="chapter-item expanded "><a href="../advanced-topics/remote-extensions.html"><strong aria-hidden="true">42.</strong> 远程开发</a></li><li class="chapter-item expanded "><a href="../advanced-topics/using-proposed-api.html"><strong aria-hidden="true">43.</strong> 使用不稳定的API</a></li><li class="chapter-item expanded affix "><li class="part-title">️️参考</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../references/vscode-api.html"><strong aria-hidden="true">44.</strong> VS Code API</a></li><li class="chapter-item expanded "><a href="../references/contribution-points.html"><strong aria-hidden="true">45.</strong> 发布内容配置</a></li><li class="chapter-item expanded "><a href="../references/activation-events.html"><strong aria-hidden="true">46.</strong> 激活事件</a></li><li class="chapter-item expanded "><a href="../references/extension-manifest.html"><strong aria-hidden="true">47.</strong> 插件清单</a></li><li class="chapter-item expanded "><a href="../references/commands.html"><strong aria-hidden="true">48.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../references/when-clause-contexts.html"><strong aria-hidden="true">49.</strong> when 子句上下文</a></li><li class="chapter-item expanded "><a href="../references/theme-color.html"><strong aria-hidden="true">50.</strong> 主题色彩</a></li><li class="chapter-item expanded "><a href="../references/icons-in-labels.html"><strong aria-hidden="true">51.</strong> 标签中的图标</a></li><li class="chapter-item expanded "><a href="../references/document-selector.html"><strong aria-hidden="true">52.</strong> 文档选择器</a></li><li class="chapter-item expanded "><a href="../references/extension-guidelines.html"><strong aria-hidden="true">53.</strong> 插件开发准则</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">VS Code 插件开发文档</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="示例语言服务器"><a class="header" href="#示例语言服务器">示例：语言服务器</a></h1>
+<p>就如你在<a href="/language-extensions/programmatic-language-features">程序性语言特性</a>章节所见，实现语言特性的直接方式是使用<code>languages.*</code>API。但是语言服务器不同，它是另一种语言插件的实现方式。</p>
+<p>本章将：</p>
+<ul>
+<li>解释语言服务器插件的好处</li>
+<li>手把手教你实现一个语言服务器<a href="https://github.com/Microsoft/vscode-languageserver-node"><code>Microsoft/vscode-languageserver-node</code></a>，你觉得啰嗦的话，也可以直接看<a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-sample">lsp-sample</a>源码。</li>
+</ul>
+<h2 id="为什么使用语言服务器"><a class="header" href="#为什么使用语言服务器">为什么使用语言服务器？</a></h2>
+<hr />
+<p>语言服务器是一种可以提升语言编辑体验的特殊VS Code插件。有了语言服务器，你可以实现如自动补全、错误检查（诊断）、转跳到定义等等其他VS Code<a href="/language-extensions/programmatic-language-features">语言特性</a>。</p>
+<p>但是在VS Code中实现语言功能会面临三个问题：</p>
+<p>第一，语言服务器一般是用他们自己原生的语言实现的，那么如何与VS Code中的Node.js运行时整合起来就是一个问题。</p>
+<p>其二，语言服务器一般都是高消耗的。比如检查文件，语言服务器需要解析大量的文件，构建起抽象语法树然后进行静态分析。这些操作会吃掉很多CPU和内存，但是与此同时VS Code的性能不能受到任何影响。</p>
+<p>第三，通常为多个编辑器开发不同的语言插件需要花费大量精力。对于语言插件开发者来说，他们需要根据不同编辑器各自的API来实现插件。而从编辑器的角度来讲，他们也不能指望语言工具API统一。最终导致了为<code>N</code>种编辑器实现<code>M</code>种语言需要花费<code>N*M</code>的工作和精力。</p>
+<p>为了解决这些问题，微软提供了<a href="https://microsoft.github.io/language-server-protocol">语言服务器协议(Language Server Protocol)</a>意图为语言插件和编辑器提供社区规范。这样一来，语言服务器就可以用任何一种语言来实现，用协议通讯也避免了插件在主进程中运行的高开销。而且任何LSP兼容的语言插件，都能和LSP兼容的代码编辑器整合起来，LSP是语言插件开发者和第三方编辑器的共赢方案。</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-languages-editors.png" alt="lsp-languages-editors" /></p>
+<p>在本章，我们将：</p>
+<ul>
+<li>根据<a href="https://github.com/Microsoft/vscode-languageserver-node">Node SDK</a>，学习如何在VS Code中新建一个语言服务器插件</li>
+<li>学习如何运行、调试、记录日志和测试语言服务器插件</li>
+<li>为你提供更多进阶的语言服务器</li>
+</ul>
+<p>?&gt; <strong>译者注</strong>：本文及其他章节所涉及的<strong>LSP</strong>全为Language Server Protocol的缩写。<strong>语言服务器协议</strong>是VS Code为了调试、分析语言的自带的中间层协议。众所周知，VS Code本身只是一个编辑器，它不含任何编程语言的功能和运行时（javascript和typescript除外），而是将语言的各种特性交给了插件创作者自由实现。</p>
+<h2 id="实现你自己的语言服务器"><a class="header" href="#实现你自己的语言服务器">实现你自己的语言服务器</a></h2>
+<hr />
+<p>在VS Code中，一个语言服务器有两个部分：</p>
+<ul>
+<li><strong>语言客户端</strong>：一个由Javascript/Typescript组成的普通插件，这个插件能使用所有的<a href="/references/vscode-api">VS Code 命名空间API</a>。</li>
+<li><strong>语言服务器</strong>：运行在单独进程中的语言分析工具。</li>
+</ul>
+<p>语言服务器运行在单独的进程有两个好处：</p>
+<ul>
+<li>只要能通过LSP通信，语言分析工具可以用任何语言实现。</li>
+<li>语言分析工具一般非常消耗CPU和内存，在单独的进程中运行能避免大性能开销</li>
+</ul>
+<p>下面是一个运行了2个<strong>语言服务器插件</strong>的示意图。HTML语言客户端和PHP语言客户端是常见的VS Code插件。两个客户端都用LSP与各自对应的语言服务器进行通信——即使PHP语言服务器是用PHP写的，但是仍然能通过LSP与PHP语言客户端建立起通信。</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-illustration.png" alt="lsp-illustration" /></p>
+<p>本篇将指引你学习如何用我们的<a href="https://github.com/Microsoft/vscode-languageserver-node">Node SDK</a>构建一个语言客户端/服务器。剩下的内容都建立在你已经了解VS Code<a href="/">插件开发</a>的基础之上。</p>
+<h2 id="示例一个简单的纯文本语言服务器"><a class="header" href="#示例一个简单的纯文本语言服务器">示例：一个简单的纯文本语言服务器</a></h2>
+<hr />
+<p>让我们首先实现一个简单的语言服务器插件吧，这个插件的功能是自动补全、诊断纯文本文件。我们会同时学习客户端/服务端的配置。
+如果你想直接上手代码：</p>
+<ul>
+<li><a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-sample">lsp-sample</a>：本篇教程的主要源代码，有大量注释</li>
+<li><a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/lsp-multi-server-sample">lsp-multi-server-sample</a>：<strong>lsp-sample</strong>的进阶版本，同样有大量注释，支持<a href="https://code.visualstudio.com/docs/editor/multi-root-workspaces">多目录工作区</a>特性的语言服务器实例。</li>
+</ul>
+<p>复制<a href="https://github.com/Microsoft/vscode-extension-samples">Microsoft/vscode-extension-samples</a>然后打开示例：</p>
+<pre><code class="language-bash">&gt; git clone https://github.com/microsoft/vscode-extension-samples.git
+&gt; cd vscode-extension-samples/lsp-sample
+&gt; npm install
+&gt; npm run compile
+&gt; code .
+</code></pre>
+<p>安装完所有依赖然后打开<strong>lsp-sample</strong>工作，里面包含客户端和服务器的代码。下面是一个整体的<strong>lsp-sample</strong>目录结构：</p>
+<pre><code>.
+├── client // 语言客户端
+│   ├── src
+│   │   ├── test // 语言客户端 / 服务器 的端到端测试
+│   │   └── extension.ts // 语言客户端入口
+├── package.json // 插件配置清单
+└── server // 语言服务器
+    └── src
+        └── server.ts // 语言服务器入口
+</code></pre>
+<h2 id="什么是language-client"><a class="header" href="#什么是language-client">什么是'Language Client'</a></h2>
+<hr />
+<p>我们先看看<code>/package.json</code>，这个文件描述了语言客户端的能力。里面有3个有趣的部分：</p>
+<p>首先看看<a href="/references/activation-events">activationEvents</a>：</p>
+<pre><code class="language-json">&quot;activationEvents&quot;: [
+    &quot;onLanguage:plaintext&quot;
+]
+</code></pre>
+<p>这个部分告诉VS Code只要打开纯文本文件之后就立刻激活插件（例如：打开一个<code>.txt</code>文件）</p>
+<p>下一步看看<a href="/extensibility-reference/contribution-points#contributesconfiguration">configuration</a>部分：</p>
+<pre><code class="language-json">&quot;configuration&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;title&quot;: &quot;Example configuration&quot;,
+    &quot;properties&quot;: {
+		&quot;languageServerExample.maxNumberOfProblems&quot;: {
+			&quot;scope&quot;: &quot;resource&quot;,
+            &quot;type&quot;: &quot;number&quot;,
+            &quot;default&quot;: 100,
+            &quot;description&quot;: &quot;Controls the maximum number of problems produced by the server.&quot;
+        }
+    }
+}
+</code></pre>
+<p>这个部分配置了用户可以自定义的<code>configuration</code>，用户通过这个配置可以在<strong>设置</strong>中对你的插件做一些修改。这并不是本节重点，稍后示例将通过代码呈现——插件如何在设置变动后将<strong>修改后的配置</strong>应用到我们的语言服务器上。</p>
+<p>真正的语言客户端代码和对应的<code>package.json</code>在<code>/client</code>文件夹中。<code>package.json</code>最有趣的部分是<code>vscode</code>插件主机API和<code>vscode-languageclient</code>这两个依赖库。</p>
+<pre><code class="language-json">&quot;engines&quot;: {
+    &quot;vscode&quot;: &quot;^1.43.0&quot;
+},
+&quot;dependencies&quot;: {
+    &quot;vscode-languageclient&quot;: &quot;^6.1.3&quot;
+}
+</code></pre>
+<p>正如上面所说，客户端实现就是一个普通的VS Code插件，它有使用全部VS Code API的能力。</p>
+<p>下面是extension.ts文件的对应内容，也是<strong>lsp-sample</strong>插件的入口：</p>
+<pre><code class="language-typescript">import * as path from 'path';
+import { workspace, ExtensionContext } from 'vscode';
+
+import {
+	LanguageClient,
+	LanguageClientOptions,
+	ServerOptions,
+	TransportKind
+} from 'vscode-languageclient';
+
+let client: LanguageClient;
+
+export function activate(context: ExtensionContext) {
+	// 服务器由node实现
+	let serverModule = context.asAbsolutePath(
+		path.join('server', 'out', 'server.js')
+	);
+	// 为服务器提供debug选项
+	// --inspect=6009: 运行在Node's Inspector mode，这样VS Code就能调试服务器了
+	let debugOptions = { execArgv: ['--nolazy', '--inspect=6009'] };
+
+	// 如果插件运行在调试模式那么就会使用debug server options
+	// 不然就使用run options
+	let serverOptions: ServerOptions = {
+		run: { module: serverModule, transport: TransportKind.ipc },
+		debug: {
+			module: serverModule,
+			transport: TransportKind.ipc,
+			options: debugOptions
+		}
+	};
+
+	// 控制语言客户端的选项
+	let clientOptions: LanguageClientOptions = {
+		// 注册纯文本服务器
+		documentSelector: [{ scheme: 'file', language: 'plaintext' }],
+		synchronize: {
+			// 当文件变动为'.clientrc'中那样时，通知服务器
+			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
+		}
+	};
+    // 创建语言客户端并启动
+	client = new LanguageClient(
+		'languageServerExample',
+		'Language Server Example',
+		serverOptions,
+		clientOptions
+	);
+
+	// 启动客户端，这也同时启动了服务器
+	client.start();
+}
+
+export function deactivate(): Thenable&lt;void&gt; {
+	if (!client) {
+		return undefined;
+	}
+	return client.stop();
+}
+
+</code></pre>
+<h2 id="什么是language-server"><a class="header" href="#什么是language-server">什么是'Language Server'</a></h2>
+<hr />
+<p>?&gt; **小提示：**本节从Github仓库中克隆下来的'server'代码是已经完成的版本，如果你需要跟随本节的步骤循序渐进，你可以新建一个<code>server.ts</code>或者修改克隆的代码。</p>
+<p>在这个例子中，服务器是Typescript实现的，由Node.js运行。因为VS Code自带Node.js运行时，所以你无需安装其他依赖，除非你对运行时有特别要求。</p>
+<p>这个语言服务器的源码在<code>/server</code>中。比较重要的<code>pacakge.json</code>部分是：</p>
+<pre><code class="language-json">&quot;dependencies&quot;: {
+    &quot;vscode-languageserver&quot;: &quot;^6.1.1&quot;,
+    &quot;vscode-languageserver-textdocument&quot;: &quot;^1.0.1&quot;
+}
+</code></pre>
+<p>这行依赖会下载<code>vscode-languageserver</code>库。</p>
+<p>下面是一个服务器的实现，提供了简单的纯文本管理——VS Code会向服务器发送一个文件的全部内容。</p>
+<pre><code class="language-typescript">import {
+  createConnection,
+  TextDocuments,
+  Diagnostic,
+  DiagnosticSeverity,
+  ProposedFeatures,
+  InitializeParams,
+  DidChangeConfigurationNotification,
+  CompletionItem,
+  CompletionItemKind,
+  TextDocumentPositionParams,
+  TextDocumentSyncKind,
+  InitializeResult
+} from 'vscode-languageserver';
+
+import { TextDocument } from 'vscode-languageserver-textdocument';
+
+// 创建一个服务器连接。使用Node的IPC作为传输方式。
+// 也包含所有的预览、建议等LSP特性
+let connection = createConnection(ProposedFeatures.all);
+
+// 创建一个简单的文本管理器。
+// 文本管理器只支持全文本同步。
+let documents: TextDocuments&lt;TextDocument&gt; = new TextDocuments(TextDocument);
+
+let hasConfigurationCapability: boolean = false;
+let hasWorkspaceFolderCapability: boolean = false;
+let hasDiagnosticRelatedInformationCapability: boolean = false;
+
+connection.onInitialize((params: InitializeParams) =&gt; {
+	let capabilities = params.capabilities;
+
+	// 客户端是否支持`workspace/configuration`请求?
+	// 如果不是的话，降级到使用全局设置
+	hasConfigurationCapability = !!(
+      capabilities.workspace &amp;&amp; !!capabilities.workspace.configuration
+	);
+	hasWorkspaceFolderCapability = !!(
+		capabilities.workspace &amp;&amp; !!capabilities.workspace.workspaceFolders
+	);
+	hasDiagnosticRelatedInformationCapability = !!(
+		capabilities.textDocument &amp;&amp;
+		capabilities.textDocument.publishDiagnostics &amp;&amp;
+		capabilities.textDocument.publishDiagnostics.relatedInformation
+	);
+
+	const result: InitializeResult = {
+		capabilities: {
+			textDocumentSync: TextDocumentSyncKind.Incremental,
+			// Tell the client that this server supports code completion.
+			completionProvider: {
+				resolveProvider: true
+			}
+		}
+	};
+
+	if (hasWorkspaceFolderCapability) {
+		result.capabilities.workspace = {
+			workspaceFolders: {
+				supported: true
+			}
+		};
+	}
+
+	return result;
+});
+
+connection.onInitialized(() =&gt; {
+	if (hasConfigurationCapability) {
+		// 为所有配置Register for all configuration changes.
+		connection.client.register(
+			DidChangeConfigurationNotification.type,
+			undefined
+		);
+	}
+	if (hasWorkspaceFolderCapability) {
+		connection.workspace.onDidChangeWorkspaceFolders(_event =&gt; {
+			connection.console.log('Workspace folder change event received.');
+		});
+	}
+});
+
+// 配置示例
+interface ExampleSettings {
+	maxNumberOfProblems: number;
+}
+
+// 当客户端不支持`workspace/configuration`请求时，使用global settings
+// 请注意，在这个例子中服务器使用的客户端并不是问题所在，而是这种情况还可能发生在其他客户端身上。
+const defaultSettings: ExampleSettings = { maxNumberOfProblems: 1000 };
+let globalSettings: ExampleSettings = defaultSettings;
+
+// 对所有打开的文档配置进行缓存
+let documentSettings: Map&lt;string, Thenable&lt;ExampleSettings&gt;&gt; = new Map();
+
+connection.onDidChangeConfiguration(change =&gt; {
+	if (hasConfigurationCapability) {
+		// 重置所有已缓存的文档配置
+		documentSettings.clear();
+	} else {
+		globalSettings = &lt;ExampleSettings&gt;(
+			(change.settings.languageServerExample || defaultSettings)
+		);
+	}
+
+	// 重新验证所有打开的文本文档
+	documents.all().forEach(validateTextDocument);
+});
+
+function getDocumentSettings(resource: string): Thenable&lt;ExampleSettings&gt; {
+	if (!hasConfigurationCapability) {
+		return Promise.resolve(globalSettings);
+	}
+	let result = documentSettings.get(resource);
+	if (!result) {
+		result = connection.workspace.getConfiguration({
+			scopeUri: resource,
+			section: 'languageServerExample'
+		});
+		documentSettings.set(resource, result);
+	}
+	return result;
+}
+
+// 只对打开的文档保留设置
+documents.onDidClose(e =&gt; {
+	documentSettings.delete(e.document.uri);
+});
+
+// 文档的文本内容发生了改变。
+// 这个事件在文档第一次打开或者内容变动时才会触发。
+documents.onDidChangeContent(change =&gt; {
+	validateTextDocument(change.document);
+});
+
+async function validateTextDocument(textDocument: TextDocument): Promise&lt;void&gt; {
+	// 在这个简单的示例中，每次校验运行时我们都获取一次配置
+	let settings = await getDocumentSettings(textDocument.uri);
+
+	// 校验器如果检测到连续超过2个以上的大写字母则会报错
+	let text = textDocument.getText();
+	let pattern = /\b[A-Z]{2,}\b/g;
+	let m: RegExpExecArray | null;
+
+    let problems = 0;
+	let diagnostics: Diagnostic[] = [];
+	while ((m = pattern.exec(text)) &amp;&amp; problems &lt; settings.maxNumberOfProblems) {
+		problems++;
+		let diagnosic: Diagnostic = {
+			severity: DiagnosticSeverity.Warning,
+			range: {
+				start: textDocument.positionAt(m.index),
+				end: textDocument.positionAt(m.index + m[0].length)
+			},
+			message: `${m[0]} is all uppercase.`,
+			source: 'ex'
+		};
+		if (hasDiagnosticRelatedInformationCapability) {
+			diagnosic.relatedInformation = [
+				{
+					location: {
+						uri: textDocument.uri,
+						range: Object.assign({}, diagnosic.range)
+					},
+					message: 'Spelling matters'
+				},
+				{
+					location: {
+						uri: textDocument.uri,
+						range: Object.assign({}, diagnosic.range)
+					},
+					message: 'Particularly for names'
+				}
+			];
+		}
+		diagnostics.push(diagnosic);
+	}
+    // 将错误处理结果发送给VS Code
+	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+}
+
+connection.onDidChangeWatchedFiles(_change =&gt; {
+	// 监测VS Code中的文件变动
+	connection.console.log('We received an file change event');
+});
+
+// 这个处理函数提供了初始补全项列表
+connection.onCompletion(
+	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] =&gt; {
+	// 传入的变量包含了文本请求代码补全的位置。
+	// 在这个示例中我们忽略了这个信息，总是提供相同的补全选项。
+	return [
+		{
+			label: 'TypeScript',
+			kind: CompletionItemKind.Text,
+			data: 1
+		},
+		{
+			label: 'JavaScript',
+			kind: CompletionItemKind.Text,
+			data: 2
+		}
+		];
+	}
+);
+
+// 这个函数为补全列表的选中项提供了更多信息
+connection.onCompletionResolve(
+	(item: CompletionItem): CompletionItem =&gt; {
+		if (item.data === 1) {
+			item.detail = 'TypeScript details';
+			item.documentation = 'TypeScript documentation';
+		} else if (item.data === 2) {
+			item.detail = 'JavaScript details';
+			item.documentation = 'JavaScript documentation';
+		}
+		return item;
+	}
+);
+
+// 让文档管理器监听文档的打开，变动和关闭事件。
+documents.listen(connection);
+
+// 连接后启动监听
+connection.listen();
+
+</code></pre>
+<h2 id="添加一个简单的语法校验器"><a class="header" href="#添加一个简单的语法校验器">添加一个简单的语法校验器</a></h2>
+<hr />
+<p>为了给服务器添加文本校验，我们给text document manager添加一个listener然后在文本变动时调用，接下来就交给服务器去判断调用校验器的最佳时机了。在我们的示例中，服务器的功能是校验纯文本然后给所有大写单词进行标记。对应的代码片段：</p>
+<pre><code class="language-typescript">// 文本文件的内容改变时。文档首次打开或者文档内容修改时会触发这个事件。
+documents.onDidChangeContent(async change =&gt; {
+  let textDocument = change.document;
+  // 这个简单示例中，每次校验时我们都获取一次设置
+  let settings = await getDocumentSettings(textDocument.uri);
+
+  // 校验器会检查所有的大写单词是否超过 2 个字母
+  let text = textDocument.getText();
+  let pattern = /\b[A-Z]{2,}\b/g;
+  let m: RegExpExecArray | null;
+
+  let problems = 0;
+  let diagnostics: Diagnostic[] = [];
+  while ((m = pattern.exec(text)) &amp;&amp; problems &lt; settings.maxNumberOfProblems) {
+    problems++;
+    let diagnostic: Diagnostic = {
+      severity: DiagnosticSeverity.Warning,
+      range: {
+        start: textDocument.positionAt(m.index),
+        end: textDocument.positionAt(m.index + m[0].length)
+      },
+      message: `${m[0]} is all uppercase.`,
+      source: 'ex'
+    };
+    if (hasDiagnosticRelatedInformationCapability) {
+      diagnostic.relatedInformation = [
+        {
+          location: {
+            uri: textDocument.uri,
+            range: Object.assign({}, diagnostic.range)
+          },
+          message: 'Spelling matters'
+        },
+        {
+          location: {
+            uri: textDocument.uri,
+            range: Object.assign({}, diagnostic.range)
+          },
+          message: 'Particularly for names'
+        }
+      ];
+    }
+    diagnostics.push(diagnostic);
+  }
+
+  // 将诊断信息发送给 VS Code
+  connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+});
+</code></pre>
+<h2 id="诊断提示和小技巧"><a class="header" href="#诊断提示和小技巧">诊断提示和小技巧</a></h2>
+<hr />
+<ul>
+<li>如果出错的开始点和结束点在同一个位置，VS Code会在那个单词的位置上打上波浪线</li>
+<li>如果你想要把波浪线加到行未为止，就把<code>end position</code>设置为<code>Number.MAX_VALUE</code></li>
+</ul>
+<p>运行语言服务器步骤：</p>
+<ol>
+<li>通过快捷键(<kbd>Ctrl+Shift+B</kbd>)启动build任务。这个任务会把客户端和服务器端都编译掉。</li>
+<li>打开调试侧边栏，选择<code>启动客户端</code>加载配置，然后按<code>开始调试</code>按钮启动<code>扩展开发主机</code>。</li>
+<li>在根目录下新建一个'test.txt'文件，然后粘贴下述内容：</li>
+</ol>
+<pre><code>TypeScript lets you write JavaScript the way you really want to.
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+ANY browser. ANY host. ANY OS. Open Source.
+</code></pre>
+<p><code>扩展开发主机</code>实例看起来像是这样：</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/validation.png" alt="validation" /></p>
+<h2 id="调试客户端和服务端"><a class="header" href="#调试客户端和服务端">调试客户端和服务端</a></h2>
+<hr />
+<p>调试客户端代码就像调试普通插件一样简单。在代码中打上断点，然后按<kbd>F5</kbd>启动插件调试。</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/debugging-client.png" alt="debugging-client" /></p>
+<p>因为服务器是由<code>LanguageClient</code>启动的，我们需要附加一个<em>调试器</em>给运行中的服务器。为了做到这一点，切换到<strong>调试</strong>侧边栏，选择加载配置<code>Attach to Server</code>然后按<kbd>F5</kbd>启动调试（要保证server已经启动哦，也就是上面一步），看起来会像这样：</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/debugging-server.png" alt="debugging-server" /></p>
+<h2 id="为语言服务器加上日志"><a class="header" href="#为语言服务器加上日志">为语言服务器加上日志</a></h2>
+<hr />
+<p>如果你是用<code>vscode-languageclient</code>实现的客户端，你可以配置<code>[langId].trace.server</code>指示客户端在<code>output(输出)</code>面板中显示通信日志。</p>
+<p>对于<strong>Isp-sample</strong>你能在<code>&quot;languageServerExample.trace.server&quot;: &quot;verbose&quot;</code>进行配置。现在看看&quot;Language Server Example&quot;频道，你应该能看到这些日志：</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-log.png" alt="lsp-log" /></p>
+<p>因为语言服务器通信会非常啰嗦（5s的正常使用会产生5000行日志），因此我们提供了一个可视化和可筛选的日志工具。你可以先从频道中保存所有的日志，然后在<a href="https://microsoft.github.io/language-server-protocol/inspector/">语言服务器协议检查器</a>中加载。</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/lsp-inspector.png" alt="lsp-inspector" /></p>
+<h2 id="在服务器中设置configuration"><a class="header" href="#在服务器中设置configuration">在服务器中设置Configuration</a></h2>
+<hr />
+<p>当我们写插件的客户端部分的时候，我们已经定义了一个控制最大问题报告数的配置。所以我们也可以在服务器中写一段读取客户端配置的代码：</p>
+<pre><code class="language-typescript">function getDocumentSettings(resource: string): Thenable&lt;ExampleSettings&gt; {
+	if (!hasConfigurationCapability) {
+		return Promise.resolve(globalSettings);
+	}
+	let result = documentSettings.get(resource);
+	if (!result) {
+		result = connection.workspace.getConfiguration({
+			scopeUri: resource,
+			section: 'languageServerExample'
+		});
+		documentSettings.set(resource, result);
+	}
+	return result;
+}
+</code></pre>
+<p>现在唯一要做的事情就是在服务器端中监听用户修改的设置变动，然后重新验证已经打开的文本文件。为了重用文本变动事件的处理函数，我们把代码提取到<code>validateTextDocument</code>函数中，然后新建一个<code>maxNumberOfProblems</code>变量：</p>
+<pre><code class="language-typescript">async function validateTextDocument(textDocument: TextDocument): Promise&lt;void&gt; {
+	// 在这个简单的示例中，每次校验运行时我们都获取一次配置
+	let settings = await getDocumentSettings(textDocument.uri);
+
+	// 校验器如果检测到连续超过2个以上的大写字母则会报错
+	let text = textDocument.getText();
+	let pattern = /\b[A-Z]{2,}\b/g;
+	let m: RegExpExecArray;
+
+	let problems = 0;
+	let diagnostics: Diagnostic[] = [];
+	while ((m = pattern.exec(text)) &amp;&amp; problems &lt; settings.maxNumberOfProblems) {
+		problems++;
+		let diagnosic: Diagnostic = {
+			severity: DiagnosticSeverity.Warning,
+			range: {
+				start: textDocument.positionAt(m.index),
+				end: textDocument.positionAt(m.index + m[0].length)
+			},
+			message: `${m[0]} is all uppercase.`,
+			source: 'ex'
+		};
+		if (hasDiagnosticRelatedInformationCapability) {
+			diagnosic.relatedInformation = [
+				{
+					location: {
+						uri: textDocument.uri,
+						range: Object.assign({}, diagnosic.range)
+					},
+					message: 'Spelling matters'
+				},
+				{
+					location: {
+						uri: textDocument.uri,
+						range: Object.assign({}, diagnosic.range)
+					},
+					message: 'Particularly for names'
+				}
+			];
+		}
+		diagnostics.push(diagnosic);
+	}
+
+	// 将错误处理结果发送给VS Code
+	connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+}
+</code></pre>
+<p>添加一个<em>通知处理函数</em>监听配置文件变动。</p>
+<pre><code class="language-typescript">connection.onDidChangeConfiguration(change =&gt; {
+	if (hasConfigurationCapability) {
+		// 重置所有文档设置的缓存
+		documentSettings.clear();
+	} else {
+		globalSettings = &lt;ExampleSettings&gt;(
+			(change.settings.languageServerExample || defaultSettings)
+		);
+	}
+
+	// 重新验证所有打开的文本文档
+	documents.all().forEach(validateTextDocument);
+});
+</code></pre>
+<p>再次启动客户端，然后把设置中的<code>maximum report</code>改为1，就能看到：</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/validationOneProblem.png" alt="validationOneProblem" /></p>
+<h2 id="添加其他语言特性"><a class="header" href="#添加其他语言特性">添加其他语言特性</a></h2>
+<hr />
+<p>第一个有趣的东西是，语言服务器通常会实现成文档校验器，从这个点来说，即使一个linter也算一个语言服务器，所以VS Code中的linter通常都是作为语言服务器实现的（参照<a href="https://github.com/Microsoft/vscode-eslint">eslint</a>和<a href="https://github.com/Microsoft/vscode-jshint">jslint</a>）。但是语言服务器还能做得更多，他们能提供代码不全，查找所有匹配项或者转跳到定义。下面的代码展示了为服务器添加代码补全的功能，它提供了2个建议单词&quot;TypeScript&quot;和&quot;JavaScript&quot;。</p>
+<pre><code class="language-typescript">// 这个处理函数提供了初始补全项列表
+connection.onCompletion(
+	(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] =&gt; {
+		// 传入的变量包含了文本请求代码补全的位置。
+		// 在这个示例中我们忽略了这个信息，总是提供相同的补全选项。
+		return [
+			{
+				label: 'TypeScript',
+				kind: CompletionItemKind.Text,
+				data: 1
+			},
+			{
+				label: 'JavaScript',
+				kind: CompletionItemKind.Text,
+				data: 2
+			}
+		];
+	}
+);
+
+// 这个函数为补全列表的选中项提供了更多信息
+connection.onCompletionResolve(
+	(item: CompletionItem): CompletionItem =&gt; {
+		if (item.data === 1) {
+			(item.detail = 'TypeScript details'),
+				(item.documentation = 'TypeScript documentation');
+		} else if (item.data === 2) {
+			(item.detail = 'JavaScript details'),
+				(item.documentation = 'JavaScript documentation');
+		}
+		return item;
+	}
+);
+</code></pre>
+<p><code>data</code>字段用于鉴别处理函数中传入的补全项。这个属性对协议来说是透明的，因为底层协议信息传输是基于JSON的，因此data字段只能保留从JSON序列化而来的数据。</p>
+<p>那么现在只缺告诉VS Code服务器能提供代码补全请求。为了做到点，将对应标记添加到初始化函数中：</p>
+<pre><code class="language-typescript">connection.onInitialize((params): InitializeResult =&gt; {
+	...
+	return {
+		capabilities: {
+			...
+			// 告诉客户端，服务器支持代码补全
+			completionProvider: {
+				resolveProvider: true
+			}
+		}
+	};
+});
+</code></pre>
+<p>下面的截屏显示了运行在纯文本文件中的补全代码：</p>
+<p><img src="https://code.visualstudio.com/assets/api/language-extensions/language-server-extension-guide/codeComplete.png" alt="codeComplete" /></p>
+<h2 id="测试语言服务器"><a class="header" href="#测试语言服务器">测试语言服务器</a></h2>
+<hr />
+<p>为了创建一个高质量的语言服务器，我们需要构建一个能覆盖到它所有功能点的测试套件。有两种常见的测试服务器的方式：</p>
+<ul>
+<li>单元测试：如果你想测试特定的功能点，这是一个非常有用的方式，模拟数据然后发送进去。VC Code的<a href="https://github.com/Microsoft/vscode-html-languageservice">HTML</a>/<a href="https://github.com/Microsoft/vscode-css-languageservice">CSS</a>/<a href="https://github.com/Microsoft/vscode-json-languageservice">JSON</a>语言服务器就采用了这种测试方式。LSP的npm模块包也是用这种方式。在<a href="https://github.com/Microsoft/vscode-languageserver-node/blob/master/protocol/src/test/connection.test.ts">这里</a>查看更多使用npm协议模块的单元测试。</li>
+<li>端到端测试：就像<a href="/extension-authoring/testing-extensions.html">VS Code 插件测试</a>一样，这个方式的好处是通过运行VS Code实例，打开文件，激活语言服务器/客户端然后执行<a href="/references/commands">VS Code命令</a>来测试的，如果你配置了文件、设置和依赖（如<code>node_modules</code>）以及难以模拟数据的时候，你应该优先考虑这种模式，流行的<a href="https://github.com/Microsoft/vscode-python">Python</a>插件就采用了这种测试方式。</li>
+</ul>
+<p>你可以用任何你喜欢的测试框架做单元测试。这里我们只介绍如何对语言服务器插件进行端到端测试。</p>
+<p>打开<code>.vscode/launch.json</code>，你能找到<code>E2E</code>测试目标：</p>
+<pre><code class="language-json">{
+	&quot;name&quot;: &quot;Language Server E2E Test&quot;,
+	&quot;type&quot;: &quot;extensionHost&quot;,
+	&quot;request&quot;: &quot;launch&quot;,
+	&quot;runtimeExecutable&quot;: &quot;${execPath}&quot;,
+	&quot;args&quot;: [
+		&quot;--extensionDevelopmentPath=${workspaceRoot}&quot;,
+		&quot;--extensionTestsPath=${workspaceRoot}/client/out/test&quot;,
+		&quot;${workspaceRoot}/client/testFixture&quot;
+	],
+	&quot;stopOnEntry&quot;: false,
+	&quot;sourceMaps&quot;: true,
+	&quot;outFiles&quot;: [&quot;${workspaceRoot}/client/out/test/**/*.js&quot;]
+}
+</code></pre>
+<p>如果你运行了这个测试目标，它会打开一个VS Code实例和一个叫做<code>client/testFixtur</code>的激活工作区。VS Code然后会执行所有<code>client/src/test</code>中的测试。一点调试的小提示，你可以在<code>client/src/test</code>的Typescript文件中添加断点。</p>
+<p>我们再来看看<code>completion.test.ts</code>文件：</p>
+<pre><code class="language-typescript">import * as vscode from 'vscode';
+import * as assert from 'assert';
+import { getDocUri, activate } from './helper';
+
+describe('Should do completion', () =&gt; {
+	const docUri = getDocUri('completion.txt');
+
+	it('Completes JS/TS in txt file', async () =&gt; {
+		await testCompletion(docUri, new vscode.Position(0, 0), {
+			items: [
+				{ label: 'JavaScript', kind: vscode.CompletionItemKind.Text },
+				{ label: 'TypeScript', kind: vscode.CompletionItemKind.Text }
+			]
+		});
+	});
+});
+
+async function testCompletion(
+	docUri: vscode.Uri,
+	position: vscode.Position,
+	expectedCompletionList: vscode.CompletionList
+) {
+	await activate(docUri);
+
+	// 执行 `vscode.executeCompletionItemProvider` 命令，模拟激活代码补全功能
+	const actualCompletionList = (await vscode.commands.executeCommand(
+		'vscode.executeCompletionItemProvider',
+		docUri,
+		position
+	)) as vscode.CompletionList;
+
+	assert.equal(actualCompletionList.items.length, expectedCompletionList.items.length);
+	expectedCompletionList.items.forEach((expectedItem, i) =&gt; {
+		const actualItem = actualCompletionList.items[i];
+		assert.equal(actualItem.label, expectedItem.label);
+		assert.equal(actualItem.kind, expectedItem.kind);
+	});
+}
+</code></pre>
+<p>在这个测试中，我们：</p>
+<ul>
+<li>激活了插件</li>
+<li>带上了一个URI和位置模拟信息，然后运行了<code>vscode.executeCompletionItemProvider</code>去触发补全</li>
+<li>断言返回的补全项是不是达到了我们的预期</li>
+</ul>
+<p>我们再深入一点看看<code>activate(docURI)</code>函数。它被定义在<code>client/src/test/helper.ts</code>中：</p>
+<pre><code class="language-typescript">import * as vscode from 'vscode';
+import * as path from 'path';
+
+export let doc: vscode.TextDocument;
+export let editor: vscode.TextEditor;
+export let documentEol: string;
+export let platformEol: string;
+
+/**
+ * 激活 vscode.lsp-sample 插件
+ */
+export async function activate(docUri: vscode.Uri) {
+	// extensionId来自于package.json中的`publisher.name`
+	const ext = vscode.extensions.getExtension('vscode.lsp-sample');
+	await ext.activate();
+	try {
+		doc = await vscode.workspace.openTextDocument(docUri);
+		editor = await vscode.window.showTextDocument(doc);
+		await sleep(2000); // 等待服务器激活
+	} catch (e) {
+		console.error(e);
+	}
+}
+
+async function sleep(ms: number) {
+	return new Promise(resolve =&gt; setTimeout(resolve, ms));
+}
+</code></pre>
+<p>在激活部分，我们：</p>
+<ul>
+<li>用<code>publisher.name</code> <code>extensionId</code>在<code>package.json</code>中获取到了插件</li>
+<li>打开特定的文档，然后显示在文本编辑区</li>
+<li>休眠2秒，确保启动了语言服务器</li>
+</ul>
+<p>准备好之后，我们可以运行对应语言特性的<a href="/extensibility-reference/vscode-api-commands.html">VS Code命令</a>，然后对结果进行断言测试。
+这还有一个关于诊断特性的测试实现，如果你感兴趣，可以查看这个文件<code>client/src/test/diagnostics.test.ts</code></p>
+<h2 id="进阶主题"><a class="header" href="#进阶主题">进阶主题</a></h2>
+<hr />
+<p>到目前为止，本篇教程提供了：</p>
+<ul>
+<li>一个简短的<strong>语言服务器</strong>和<strong>语言服务器协议</strong>概览</li>
+<li>VS Code中的语言服务器插件架构</li>
+<li>实现了一个<strong>Isp-sample</strong>插件，和如何开发、调试、检查和测试语言服务器</li>
+</ul>
+<h4 id="更多语言服务器特性"><a class="header" href="#更多语言服务器特性">更多语言服务器特性</a></h4>
+<p>除了代码补全之外，VS Code还支持下列特性：</p>
+<ul>
+<li>文档高亮：高亮文本中的符号</li>
+<li>悬停：为选中的文本符号提供悬停信息</li>
+<li>Signature Help：为选中的文本提供提供Signature Help</li>
+<li>转跳到定义：为选中的文本符号提供定义转跳</li>
+<li>转跳到类型定义：为选中的文本符号提供类型/接口定义转跳</li>
+<li>转跳到实现：为选中的文本符号提供实现转跳</li>
+<li>引用查找：从整个项目中查找选中文本符号的引用</li>
+<li>列出文件符号：列出文本文件中的全部符号</li>
+<li>列出工作区符号：列出整个项目中的符号</li>
+<li>执行代码：在给定文件和范围的条件下运行命令（通常如：美化、重构）</li>
+<li>CodeLens: 为给定文件计算 CodeLens 统计数据</li>
+<li>文件格式化：包括整个文件的格式化，部分文本格式化和根据类型格式化</li>
+<li>重命名：重命名整个项目内的某些符号</li>
+<li>文件链接：计算和解析文件中的链接</li>
+<li>文件色彩：计算和解析文件中的色彩，并提供编辑器内的取色器</li>
+</ul>
+<p><a href="/language-extensions/programmatic-language-features">程序性语言特性</a>章节详细介绍了上述的语言特性，并且告诉我们如何通过下述(<strong>两者之一</strong>)去实现它们：</p>
+<ul>
+<li>语言服务器协议</li>
+<li>直接使用VS Code的可拓展性API</li>
+</ul>
+<h2 id="增量文本同步更新"><a class="header" href="#增量文本同步更新">增量文本同步更新</a></h2>
+<hr />
+<p>在<code>vscode-languageserver</code>模块中，我们做了一个简单的<code>text document manager</code>同步VS Code和语言服务器。</p>
+<p>但是这种方式有两个缺点：</p>
+<ul>
+<li>文件变动时，会重复地发送整个文本数据，这个传递的数据量相当可观。</li>
+<li>现有的库通常都支持增量文本更新，不可避免地，我们会进行不必要的转换和创建抽象语法树。</li>
+</ul>
+<p>LSP因此直接提供了增量文本更新的API。</p>
+<p>现在我们要通过增加3个通知函数实现我们的增量文本更新：</p>
+<ul>
+<li>onDidOpenTextDocument：当文件打开后调用</li>
+<li>onDidChangeTextDocument：当文本变动后调用</li>
+<li>onDidCloseTextDocument：当文件关闭后调用</li>
+</ul>
+<p>下面的代码片段展示了怎么在通信中挂上这些通知函数钩子，在初始化时因如何返回函数：</p>
+<pre><code class="language-typescript">connection.onInitialize((params): InitializeResult =&gt; {
+	...
+	return {
+		capabilities: {
+			// 启用文档增量更新同步
+			textDocumentSync: TextDocumentSyncKind.Incremental,
+			...
+		}
+	};
+});
+
+connection.onDidOpenTextDocument((params) =&gt; {
+	// 当文档打开后触发，params.uri提供了文档的唯一地址。如果文档储存在硬盘上，那么就会是一个file类型的URI
+	// params.text——提供了文档一开始的内容
+});
+
+connection.onDidChangeTextDocument((params) =&gt; {
+	// 文档的文本内容发生了改变时触发。
+	// params.uri提供了文档的唯一地址。
+	// params.contentChanges 包含文档的变动内容
+});
+
+connection.onDidCloseTextDocument((params) =&gt; {
+	// 文档关闭后触发。
+	// params.uri提供了文档的唯一地址。
+});
+</code></pre>
+<h4 id="直接用vs-code-api实现语言特性"><a class="header" href="#直接用vs-code-api实现语言特性">直接用VS Code API实现语言特性</a></h4>
+<p>语言服务器有这么多好处，只是用来提供VS Code编辑扩展能力就显得有些大材小用了。下面的例子里，我们使用<code>vscode.languages.register[LANGUAGE_FEATURE]Provider</code>选项为某类文件提供一些简单的语言服务器特性。</p>
+<p><a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/completions-sample">completions-sample</a>是一个使用<code>vscode.languages.registerCompletionItemProvider</code>为纯文本添加代码片段的例子。</p>
+<p>更多例子请参阅<a href="https://github.com/Microsoft/vscode-extension-samples">https://github.com/Microsoft/vscode-extension-samples</a></p>
+<h4 id="语言服务器的容错解析器"><a class="header" href="#语言服务器的容错解析器">语言服务器的容错解析器</a></h4>
+<p>大多数时候，编辑器中的代码都是不完整的，甚至语法都是错的，但是开发人员肯定希望自动补全等语言功能保持正常工作。因此，容错解析器就显得十分必要：解析器仍能从不完整的代码中创建有意义的AST，然后语言服务器根据这份AST提供服务。</p>
+<p>我们之前在VS Code中做过PHP的支持，我们意识到PHP官方解析器并没有自带容错，而且也不能直接在语言服务器中直接重用。所以我们一起努力做了<a href="https://github.com/Microsoft/tolerant-php-parser"> Microsoft/tolerant-php-parser</a>，并留下了详细的<a href="https://github.com/Microsoft/tolerant-php-parser/blob/master/docs/HowItWorks.md">笔记</a>，或许能帮上需要容错解析器的语言服务器作者。</p>
+<h2 id="faq"><a class="header" href="#faq">FAQ</a></h2>
+<ul>
+<li>
+<p><strong>问：当我试着向debug添加服务器的时候，我得到了&quot;cannot connect to runtime process (timeout after 5000ms)&quot;的信息？</strong></p>
+<p>答：如果服务器没有运行你还强行添加debbuger的时候，会出现这个超时问题，你也可能需要关闭服务器中的断点。</p>
+</li>
+<li>
+<p><strong>问：虽然我看完了<a href="https://microsoft.github.io/language-server-protocol/">LSP Specification</a>，但是我还有很多问题解决不了，我可以在哪获得帮助？</strong></p>
+<p>答：可以在<a href="https://github.com/Microsoft/language-server-protocol">https://github.com/Microsoft/language-server-protocol</a>中开issue。</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../language-extensions/programmatic-language-features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../language-extensions/embedded-languages.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../language-extensions/programmatic-language-features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../language-extensions/embedded-languages.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

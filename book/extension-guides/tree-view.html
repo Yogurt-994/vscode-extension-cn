@@ -1,0 +1,353 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>树视图 - VS Code 插件开发文档</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">预备知识</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../preknowledge/first-step.html"><strong aria-hidden="true">1.</strong> 非JS开发者的第一步</a></li><li class="chapter-item expanded "><a href="../preknowledge/variable-and-type.html"><strong aria-hidden="true">2.</strong> Typescript-变量和类型</a></li><li class="chapter-item expanded "><a href="../preknowledge/class.html"><strong aria-hidden="true">3.</strong> Typescript-类</a></li><li class="chapter-item expanded "><a href="../preknowledge/interface-and-namespace.html"><strong aria-hidden="true">4.</strong> Typescript-接口和命名空间</a></li><li class="chapter-item expanded "><a href="../preknowledge/generics.html"><strong aria-hidden="true">5.</strong> Typescript-泛型</a></li><li class="chapter-item expanded "><a href="../preknowledge/declaration-files.html"><strong aria-hidden="true">6.</strong> Typescript-声明文件</a></li><li class="chapter-item expanded affix "><li class="part-title">第一步</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../get-started/your-first-extension.html"><strong aria-hidden="true">7.</strong> 你的第一个插件</a></li><li class="chapter-item expanded "><a href="../get-started/extension-anatomy.html"><strong aria-hidden="true">8.</strong> 解析插件结构</a></li><li class="chapter-item expanded "><a href="../get-started/wrapping-up.html"><strong aria-hidden="true">9.</strong> 小结</a></li><li class="chapter-item expanded affix "><li class="part-title">开发插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../working-with-extensions/testing-extension.html"><strong aria-hidden="true">10.</strong> 测试插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/publish-extension.html"><strong aria-hidden="true">11.</strong> 发布插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/bundling-extension.html"><strong aria-hidden="true">12.</strong> 打包插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/continuous-integration.html"><strong aria-hidden="true">13.</strong> 持集成</a></li><li class="chapter-item expanded affix "><li class="part-title">插件功能</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-capabilities/index.html"><strong aria-hidden="true">14.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/common-capabilities.html"><strong aria-hidden="true">15.</strong> 常用功能</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/theming.html"><strong aria-hidden="true">16.</strong> 主题</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/extending-workbench.html"><strong aria-hidden="true">17.</strong> 扩展工作台</a></li><li class="chapter-item expanded affix "><li class="part-title">插件指南</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-guides/index.html"><strong aria-hidden="true">18.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-guides/command.html"><strong aria-hidden="true">19.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../extension-guides/color-theme.html"><strong aria-hidden="true">20.</strong> 色彩主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/file-icon-theme.html"><strong aria-hidden="true">21.</strong> 文件图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/product-icon-theme.html"><strong aria-hidden="true">22.</strong> 产品图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/tree-view.html" class="active"><strong aria-hidden="true">23.</strong> 树视图</a></li><li class="chapter-item expanded "><a href="../extension-guides/webview.html"><strong aria-hidden="true">24.</strong> Webview</a></li><li class="chapter-item expanded "><a href="../extension-guides/notebook.html"><strong aria-hidden="true">25.</strong> 笔记本</a></li><li class="chapter-item expanded "><a href="../extension-guides/virtual-documents.html"><strong aria-hidden="true">26.</strong> 虚拟文档</a></li><li class="chapter-item expanded "><a href="../extension-guides/task-provider.html"><strong aria-hidden="true">27.</strong> 任务</a></li><li class="chapter-item expanded "><a href="../extension-guides/scm-provider.html"><strong aria-hidden="true">28.</strong> 源控制</a></li><li class="chapter-item expanded "><a href="../extension-guides/debugger-extension.html"><strong aria-hidden="true">29.</strong> 调试器插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/markdown-extension.html"><strong aria-hidden="true">30.</strong> Markdown插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-editors.html"><strong aria-hidden="true">31.</strong> 自定义编辑器</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-data-extension.html"><strong aria-hidden="true">32.</strong> 自定义数据插件</a></li><li class="chapter-item expanded affix "><li class="part-title">语言插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../language-extensions/index.html"><strong aria-hidden="true">33.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../language-extensions/syntax-highlight-guide.html"><strong aria-hidden="true">34.</strong> 语法高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/semantic-highlight-guide.html"><strong aria-hidden="true">35.</strong> 语义高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/snippet-guide.html"><strong aria-hidden="true">36.</strong> 代码片段</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-configuration-guide.html"><strong aria-hidden="true">37.</strong> 语言配置</a></li><li class="chapter-item expanded "><a href="../language-extensions/programmatic-language-features.html"><strong aria-hidden="true">38.</strong> 程序性语言特性</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-server-extension-guide.html"><strong aria-hidden="true">39.</strong> 语言服务器</a></li><li class="chapter-item expanded "><a href="../language-extensions/embedded-languages.html"><strong aria-hidden="true">40.</strong> 嵌入语言</a></li><li class="chapter-item expanded affix "><li class="part-title">进阶主题</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../advanced-topics/extension-host.html"><strong aria-hidden="true">41.</strong> 插件主机</a></li><li class="chapter-item expanded "><a href="../advanced-topics/remote-extensions.html"><strong aria-hidden="true">42.</strong> 远程开发</a></li><li class="chapter-item expanded "><a href="../advanced-topics/using-proposed-api.html"><strong aria-hidden="true">43.</strong> 使用不稳定的API</a></li><li class="chapter-item expanded affix "><li class="part-title">️️参考</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../references/vscode-api.html"><strong aria-hidden="true">44.</strong> VS Code API</a></li><li class="chapter-item expanded "><a href="../references/contribution-points.html"><strong aria-hidden="true">45.</strong> 发布内容配置</a></li><li class="chapter-item expanded "><a href="../references/activation-events.html"><strong aria-hidden="true">46.</strong> 激活事件</a></li><li class="chapter-item expanded "><a href="../references/extension-manifest.html"><strong aria-hidden="true">47.</strong> 插件清单</a></li><li class="chapter-item expanded "><a href="../references/commands.html"><strong aria-hidden="true">48.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../references/when-clause-contexts.html"><strong aria-hidden="true">49.</strong> when 子句上下文</a></li><li class="chapter-item expanded "><a href="../references/theme-color.html"><strong aria-hidden="true">50.</strong> 主题色彩</a></li><li class="chapter-item expanded "><a href="../references/icons-in-labels.html"><strong aria-hidden="true">51.</strong> 标签中的图标</a></li><li class="chapter-item expanded "><a href="../references/document-selector.html"><strong aria-hidden="true">52.</strong> 文档选择器</a></li><li class="chapter-item expanded "><a href="../references/extension-guidelines.html"><strong aria-hidden="true">53.</strong> 插件开发准则</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">VS Code 插件开发文档</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="树视图"><a class="header" href="#树视图">树视图</a></h1>
+<p>本节将教你如何为VS Code添加<em>视图容器</em>和<em>树视图</em>的插件，示例插件的源代码请查看<a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample">https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample</a>。</p>
+<h2 id="视图容器"><a class="header" href="#视图容器">视图容器</a></h2>
+<hr />
+<p><em>视图容器</em>包含了一列<em>视图(views)</em>，这些<em>视图</em>又包含在内置的<em>视图容器</em>中。</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/tree-view/view-container.png" alt="view-container" /></p>
+<p>要想配置一个视图容器，你首先得注册<code>package.json</code>中的<a href="/references/contribution-points#contributesviewscontainers"><code>contributes.viewsContainers</code></a>。你还必须配置以下字段：</p>
+<ul>
+<li><code>id</code>: 新视图容器的名称</li>
+<li><code>title</code>: 展示给用户的视图容器名称，它会显示在视图容器上方</li>
+<li><code>icon</code>: 在活动栏中展示的图标</li>
+</ul>
+<pre><code class="language-json">&quot;contributes&quot;: {
+  &quot;viewsContainers&quot;: {
+    &quot;activitybar&quot;: [
+      {
+        &quot;id&quot;: &quot;package-explorer&quot;,
+        &quot;title&quot;: &quot;Package Explorer&quot;,
+        &quot;icon&quot;: &quot;media/dep.svg&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<h2 id="树视图-1"><a class="header" href="#树视图-1">树视图</a></h2>
+<hr />
+<p><em>视图</em>是显示在视图容器中的UI片段。使用<a href="/references/contribution-points#contributesviews"><code>contributes.views</code></a>进行配置，你就可以将新的<em>视图</em>添加到内置或者你配置好的视图容器中了。</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/tree-view/view.png" alt="view" /></p>
+<p>要想配置一个<em>视图</em>，你首先得注册<code>package.json</code>中的<a href="/references/vscode-api"><code>contributes.views</code></a>。你必须给<em>视图</em>配置一个ID外加一个名称，你还可以配置<em>视图</em>出现的位置：</p>
+<ul>
+<li><code>explorer</code>: 显示在资源管理器侧边栏</li>
+<li><code>debug</code>: 显示在调试侧边栏</li>
+<li><code>scm</code>: 显示在源代码侧边栏</li>
+<li><code>test</code>: 测试侧边栏中的资源管理器视图</li>
+<li>显示在你定义好的<em>视图容器</em>中</li>
+</ul>
+<pre><code class="language-json">&quot;contributes&quot;: {
+  &quot;views&quot;: {
+    &quot;package-explorer&quot;: [
+      {
+        &quot;id&quot;: &quot;nodeDependencies&quot;,
+        &quot;name&quot;: &quot;Node Dependencies&quot;,
+        &quot;when&quot;: &quot;explorer&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<p>当用户打开了对应的视图，VS Code会触发<a href="/references/activation-events?id=onview"><code>onView:${viewId}</code></a>事件(如上面例子中，这个事件写为<code>onView:nodeDependencies</code>)。你也可以通过配置<code>when</code>字段控制视图的展示。</p>
+<h2 id="视图的操作"><a class="header" href="#视图的操作">视图的操作</a></h2>
+<hr />
+<p>你可以配置<em>视图</em>下述位置的操作：</p>
+<ul>
+<li><code>view/title</code>: <em>视图</em>标题位置显示的操作。这里可以配置主要的操作，使用<code>&quot;group&quot;: &quot;navigation&quot;</code>进行配置，剩余的二级操作则出现在<code>...</code>菜单中。</li>
+<li><code>view/item/context</code>: 每个<em>视图项</em>的操作。这里可以配置主要的操作，使用<code>&quot;group&quot;: &quot;inline&quot;</code>，剩余的二级操作则出现在<code>...</code>菜单中。</li>
+</ul>
+<p>使用<code>when</code>属性控制这些操作的展示。</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/extension-guides/images/tree-view/view-actions.png" alt="view-actions" /></p>
+<p>例如：</p>
+<pre><code class="language-json">&quot;contributes&quot;: {
+  &quot;commands&quot;: [
+    {
+      &quot;command&quot;: &quot;nodeDependencies.refreshEntry&quot;,
+      &quot;title&quot;: &quot;Refresh&quot;,
+      &quot;icon&quot;: {
+        &quot;light&quot;: &quot;resources/light/refresh.svg&quot;,
+        &quot;dark&quot;: &quot;resources/dark/refresh.svg&quot;
+      }
+    },
+    {
+      &quot;command&quot;: &quot;nodeDependencies.addEntry&quot;,
+      &quot;title&quot;: &quot;Add&quot;
+    },
+    {
+      &quot;command&quot;: &quot;nodeDependencies.editEntry&quot;,
+      &quot;title&quot;: &quot;Edit&quot;,
+      &quot;icon&quot;: {
+        &quot;light&quot;: &quot;resources/light/edit.svg&quot;,
+        &quot;dark&quot;: &quot;resources/dark/edit.svg&quot;
+      }
+    },
+    {
+      &quot;command&quot;: &quot;nodeDependencies.deleteEntry&quot;,
+      &quot;title&quot;: &quot;Delete&quot;
+    }
+  ],
+  &quot;menus&quot;: {
+    &quot;view/title&quot;: [
+      {
+        &quot;command&quot;: &quot;nodeDependencies.refreshEntry&quot;,
+        &quot;when&quot;: &quot;view == nodeDependencies&quot;,
+        &quot;group&quot;: &quot;navigation&quot;
+      },
+      {
+        &quot;command&quot;: &quot;nodeDependencies.addEntry&quot;,
+        &quot;when&quot;: &quot;view == nodeDependencies&quot;
+      }
+    ],
+    &quot;view/item/context&quot;: [
+      {
+        &quot;command&quot;: &quot;nodeDependencies.editEntry&quot;,
+        &quot;when&quot;: &quot;view == nodeDependencies &amp;&amp; viewItem == dependency&quot;,
+        &quot;group&quot;: &quot;inline&quot;
+      },
+      {
+        &quot;command&quot;: &quot;nodeDependencies.deleteEntry&quot;,
+        &quot;when&quot;: &quot;view == nodeDependencies &amp;&amp; viewItem == dependency&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<p>!&gt; <strong>注意</strong>：如果你需要针对特定的条目显示特殊的操作，定义树视图项的<code>TreeItem.contextValue</code>，并且在<code>when</code>中使用表达式，视图项的值储存在表达式的<code>viewItem</code>中。</p>
+<p>如：</p>
+<pre><code class="language-json">&quot;contributes&quot;: {
+  &quot;menus&quot;: {
+    &quot;view/item/context&quot;: [
+      {
+        &quot;command&quot;: &quot;nodeDependencies.deleteEntry&quot;,
+        &quot;when&quot;: &quot;view == nodeDependencies &amp;&amp; viewItem == dependency&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<h2 id="为树视图提供数据"><a class="header" href="#为树视图提供数据">为树视图提供数据</a></h2>
+<hr />
+<p>插件创作者需要注册<a href="https://code.visualstudio.com/api/references/vscode-api#TreeDataProvider"><code>TreeDataProvider</code></a>，以便动态生成<em>视图</em>中的数据。</p>
+<pre><code class="language-typescript">vscode.window.registerTreeDataProvider('nodeDependencies', new DepNodeProvider());
+</code></pre>
+<p>更多实现请参考<a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample/src/nodeDependencies.ts">nodeDependencies.ts</a></p>
+<h2 id="动态创建树视图"><a class="header" href="#动态创建树视图">动态创建树视图</a></h2>
+<hr />
+<p>如果你想在<em>视图</em>中通过编程手段创建一些操作，你就不能再注册<code>window.registerTreeDataProvider</code>了，而是<code>window.createTreeView</code>，这样一来你就有权限提供你喜欢的视图操作了：</p>
+<pre><code class="language-typescript">vscode.window.createTreeView('ftpExplorer', {
+  treeDataProvider: new FtpTreeDataProvider()
+});
+</code></pre>
+<p>更多实现请参考<a href="https://github.com/Microsoft/vscode-extension-samples/tree/master/tree-view-sample/src/ftpExplorer.ts">ftpExplorer.ts</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../extension-guides/product-icon-theme.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../extension-guides/webview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../extension-guides/product-icon-theme.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../extension-guides/webview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

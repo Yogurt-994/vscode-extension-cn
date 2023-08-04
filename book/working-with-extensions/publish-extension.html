@@ -1,0 +1,365 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>发布插件 - VS Code 插件开发文档</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">预备知识</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../preknowledge/first-step.html"><strong aria-hidden="true">1.</strong> 非JS开发者的第一步</a></li><li class="chapter-item expanded "><a href="../preknowledge/variable-and-type.html"><strong aria-hidden="true">2.</strong> Typescript-变量和类型</a></li><li class="chapter-item expanded "><a href="../preknowledge/class.html"><strong aria-hidden="true">3.</strong> Typescript-类</a></li><li class="chapter-item expanded "><a href="../preknowledge/interface-and-namespace.html"><strong aria-hidden="true">4.</strong> Typescript-接口和命名空间</a></li><li class="chapter-item expanded "><a href="../preknowledge/generics.html"><strong aria-hidden="true">5.</strong> Typescript-泛型</a></li><li class="chapter-item expanded "><a href="../preknowledge/declaration-files.html"><strong aria-hidden="true">6.</strong> Typescript-声明文件</a></li><li class="chapter-item expanded affix "><li class="part-title">第一步</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../get-started/your-first-extension.html"><strong aria-hidden="true">7.</strong> 你的第一个插件</a></li><li class="chapter-item expanded "><a href="../get-started/extension-anatomy.html"><strong aria-hidden="true">8.</strong> 解析插件结构</a></li><li class="chapter-item expanded "><a href="../get-started/wrapping-up.html"><strong aria-hidden="true">9.</strong> 小结</a></li><li class="chapter-item expanded affix "><li class="part-title">开发插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../working-with-extensions/testing-extension.html"><strong aria-hidden="true">10.</strong> 测试插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/publish-extension.html" class="active"><strong aria-hidden="true">11.</strong> 发布插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/bundling-extension.html"><strong aria-hidden="true">12.</strong> 打包插件</a></li><li class="chapter-item expanded "><a href="../working-with-extensions/continuous-integration.html"><strong aria-hidden="true">13.</strong> 持集成</a></li><li class="chapter-item expanded affix "><li class="part-title">插件功能</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-capabilities/index.html"><strong aria-hidden="true">14.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/common-capabilities.html"><strong aria-hidden="true">15.</strong> 常用功能</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/theming.html"><strong aria-hidden="true">16.</strong> 主题</a></li><li class="chapter-item expanded "><a href="../extension-capabilities/extending-workbench.html"><strong aria-hidden="true">17.</strong> 扩展工作台</a></li><li class="chapter-item expanded affix "><li class="part-title">插件指南</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../extension-guides/index.html"><strong aria-hidden="true">18.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../extension-guides/command.html"><strong aria-hidden="true">19.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../extension-guides/color-theme.html"><strong aria-hidden="true">20.</strong> 色彩主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/file-icon-theme.html"><strong aria-hidden="true">21.</strong> 文件图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/product-icon-theme.html"><strong aria-hidden="true">22.</strong> 产品图标主题</a></li><li class="chapter-item expanded "><a href="../extension-guides/tree-view.html"><strong aria-hidden="true">23.</strong> 树视图</a></li><li class="chapter-item expanded "><a href="../extension-guides/webview.html"><strong aria-hidden="true">24.</strong> Webview</a></li><li class="chapter-item expanded "><a href="../extension-guides/notebook.html"><strong aria-hidden="true">25.</strong> 笔记本</a></li><li class="chapter-item expanded "><a href="../extension-guides/virtual-documents.html"><strong aria-hidden="true">26.</strong> 虚拟文档</a></li><li class="chapter-item expanded "><a href="../extension-guides/task-provider.html"><strong aria-hidden="true">27.</strong> 任务</a></li><li class="chapter-item expanded "><a href="../extension-guides/scm-provider.html"><strong aria-hidden="true">28.</strong> 源控制</a></li><li class="chapter-item expanded "><a href="../extension-guides/debugger-extension.html"><strong aria-hidden="true">29.</strong> 调试器插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/markdown-extension.html"><strong aria-hidden="true">30.</strong> Markdown插件</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-editors.html"><strong aria-hidden="true">31.</strong> 自定义编辑器</a></li><li class="chapter-item expanded "><a href="../extension-guides/custom-data-extension.html"><strong aria-hidden="true">32.</strong> 自定义数据插件</a></li><li class="chapter-item expanded affix "><li class="part-title">语言插件</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../language-extensions/index.html"><strong aria-hidden="true">33.</strong> 概述</a></li><li class="chapter-item expanded "><a href="../language-extensions/syntax-highlight-guide.html"><strong aria-hidden="true">34.</strong> 语法高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/semantic-highlight-guide.html"><strong aria-hidden="true">35.</strong> 语义高亮</a></li><li class="chapter-item expanded "><a href="../language-extensions/snippet-guide.html"><strong aria-hidden="true">36.</strong> 代码片段</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-configuration-guide.html"><strong aria-hidden="true">37.</strong> 语言配置</a></li><li class="chapter-item expanded "><a href="../language-extensions/programmatic-language-features.html"><strong aria-hidden="true">38.</strong> 程序性语言特性</a></li><li class="chapter-item expanded "><a href="../language-extensions/language-server-extension-guide.html"><strong aria-hidden="true">39.</strong> 语言服务器</a></li><li class="chapter-item expanded "><a href="../language-extensions/embedded-languages.html"><strong aria-hidden="true">40.</strong> 嵌入语言</a></li><li class="chapter-item expanded affix "><li class="part-title">进阶主题</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../advanced-topics/extension-host.html"><strong aria-hidden="true">41.</strong> 插件主机</a></li><li class="chapter-item expanded "><a href="../advanced-topics/remote-extensions.html"><strong aria-hidden="true">42.</strong> 远程开发</a></li><li class="chapter-item expanded "><a href="../advanced-topics/using-proposed-api.html"><strong aria-hidden="true">43.</strong> 使用不稳定的API</a></li><li class="chapter-item expanded affix "><li class="part-title">️️参考</li><li class="spacer"></li><li class="chapter-item expanded "><a href="../references/vscode-api.html"><strong aria-hidden="true">44.</strong> VS Code API</a></li><li class="chapter-item expanded "><a href="../references/contribution-points.html"><strong aria-hidden="true">45.</strong> 发布内容配置</a></li><li class="chapter-item expanded "><a href="../references/activation-events.html"><strong aria-hidden="true">46.</strong> 激活事件</a></li><li class="chapter-item expanded "><a href="../references/extension-manifest.html"><strong aria-hidden="true">47.</strong> 插件清单</a></li><li class="chapter-item expanded "><a href="../references/commands.html"><strong aria-hidden="true">48.</strong> 命令</a></li><li class="chapter-item expanded "><a href="../references/when-clause-contexts.html"><strong aria-hidden="true">49.</strong> when 子句上下文</a></li><li class="chapter-item expanded "><a href="../references/theme-color.html"><strong aria-hidden="true">50.</strong> 主题色彩</a></li><li class="chapter-item expanded "><a href="../references/icons-in-labels.html"><strong aria-hidden="true">51.</strong> 标签中的图标</a></li><li class="chapter-item expanded "><a href="../references/document-selector.html"><strong aria-hidden="true">52.</strong> 文档选择器</a></li><li class="chapter-item expanded "><a href="../references/extension-guidelines.html"><strong aria-hidden="true">53.</strong> 插件开发准则</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">VS Code 插件开发文档</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="发布插件"><a class="header" href="#发布插件">发布插件</a></h1>
+<h2 id="vsce--发布工具参阅"><a class="header" href="#vsce--发布工具参阅">vsce —— 发布工具参阅</a></h2>
+<p><a href="https://github.com/Microsoft/vsce">vsce</a>是一个用于将插件发布到<a href="https://code.visualstudio.com/docs/editor/extension-gallery">市场</a>上的命令行工具。</p>
+<h2 id="安装"><a class="header" href="#安装">安装</a></h2>
+<hr />
+<p>请确认本机已经安装了<a href="https://nodejs.org/">Node.js</a>，然后运行：</p>
+<pre><code class="language-bash">npm install -g vsce
+</code></pre>
+<h2 id="使用"><a class="header" href="#使用">使用</a></h2>
+<hr />
+<p>然后你就可以在命令行里直接使用<code>vsce</code>了。下面是一个快速发布的示例（在你登录和打包好插件之后）:</p>
+<pre><code class="language-bash">$ vsce publish
+Publishing uuid@0.0.1...
+Successfully published uuid@0.0.1!
+</code></pre>
+<p>更多可用的命令参数，请使用<code>vsce --help</code></p>
+<h2 id="发布教程"><a class="header" href="#发布教程">发布教程</a></h2>
+<hr />
+<p>!&gt; <strong>注意：</strong> 出于安全考虑，<code>vsce</code>不会发布包含用户提供 SVG 图片的插件。</p>
+<p>发布工具会检查以下内容：</p>
+<ul>
+<li><code>pacakge.json</code>文件中的 icon 不可以是 SVG。</li>
+<li><code>pacakge.json</code>中的徽章不可以是 SVG，除非来自于<a href="/extensibility-reference/extension-manifest.html#%E4%BD%BF%E7%94%A8%E8%AE%A4%E8%AF%81%E8%BF%87%E7%9A%84%E6%A0%87%E5%BF%97">可靠的图标来源</a></li>
+<li><code>README.md</code>和<code>CHANGELOG.md</code>中的图片链接需要使用<code>https</code>协议</li>
+<li><code>README.md</code>和<code>CHANGELOG.md</code>中的图片不可以是 SVG，除非来自<a href="/extensibility-reference/extension-manifest.html#%E4%BD%BF%E7%94%A8%E8%AE%A4%E8%AF%81%E8%BF%87%E7%9A%84%E6%A0%87%E5%BF%97">可靠的图标来源</a></li>
+</ul>
+<hr />
+<p>VS Code 插件市场的服务是<a href="https://visualstudio.microsoft.com/team-services">Visual Studio Team Services</a>提供的，因此验证、代理、管理插件都是由这个服务提供的。</p>
+<p><code>vsce</code>只能用<a href="https://docs.microsoft.com/vsts/integrate/get-started/authentication/pats">Personal Access Tokens</a>发布插件，所以至少要创建一个 Token 以便发布插件。</p>
+<h4 id="获取-personal-access-token"><a class="header" href="#获取-personal-access-token">获取 Personal Access Token</a></h4>
+<p>首先，你得有一个<a href="https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization-msa-or-work-student">Azure DevOps 组织</a>。</p>
+<p>下面的例子里，我们假设组织名为<code>vscode</code>，从你的组织主页（例如：<code>https://dev.azure.com/vscode</code> ）进入**安全（Security）**页面：</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token1.png" alt="publishers1" /></p>
+<p>选择 Personal Access Token，点击<strong>New Token</strong>创建一个新的 Personal Access Token</p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token2.png" alt="publishers2" /></p>
+<p>给 Personal Access Token 添加描述，过期时间等等，你最好把过期时间设置为 1 年，这样你接下就能方便很多，选择<strong>custom defined（用户自定义）<strong>范围，然后点击</strong>Show all scopes(显示全部)</strong></p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token3.png" alt="publishers3" /></p>
+<p>最后，在这个列表中找到<strong>Marketplace</strong>，并勾选<strong>Acquire</strong>和<strong>Manage</strong></p>
+<p><img src="https://media.githubusercontent.com/media/Microsoft/vscode-docs/master/api/working-with-extensions/images/publishing-extension/token4.png" alt="publishers4" /></p>
+<p>点击<strong>Create</strong>，你就会看到新创建的 Personal Access Token 了，复制好，你接下来就会用到这个 token 来创建一个<em>发行方</em>了。</p>
+<h4 id="创建一个发行方"><a class="header" href="#创建一个发行方">创建一个发行方</a></h4>
+<p><strong>发行方</strong>是 VS Code 市场有权发布插件的唯一标识，每个插件的<a href="/extensibility-reference/extension-manifest.html">package.json</a>文件都包含着<code>publisher</code>字段。</p>
+<p>现在我们已经有了<a href="#%E8%8E%B7%E5%8F%96Personal-Access-Token">Personal Access Token</a>，我们马上可以用<code>vsce</code>创建一个发行方：</p>
+<pre><code class="language-bash">vsce create-publisher (publisher name)
+</code></pre>
+<p><code>vsce</code>会记住这个 Personal Access Token，日后你需要再次使用的时候会自动带上。</p>
+<p>?&gt; 注意：另外，你也可以在市场的发行方<a href="https://marketplace.visualstudio.com/manage">管理页</a>中创建发行方，然后用这个账号登录<code>vsce</code>。</p>
+<h4 id="发行方登录"><a class="header" href="#发行方登录">发行方登录</a></h4>
+<p>如果你已经有发行方账号了：</p>
+<pre><code class="language-bash">vsce login (publisher name)
+</code></pre>
+<p>和<code>create-publisher</code>命令类似地，<code>vsce</code>会要求输入你的 Personal Access Token。</p>
+<p>你也可以用命令参数<code>-p &lt;token&gt;</code>直接登录然后立即发布插件：</p>
+<pre><code class="language-bash">vsce publish -p &lt;token&gt;
+</code></pre>
+<h4 id="增量更新插件版本"><a class="header" href="#增量更新插件版本">增量更新插件版本</a></h4>
+<p>用 SemVer 语义标识符：<code>major</code>，<code>minor</code>，<code>patch</code>增量更新插件版本号。</p>
+<p>例如，你想把插件从 1.0.0 更新到 1.1.0，那么加上<code>minor</code>：</p>
+<pre><code class="language-bash">vsce publish minor
+</code></pre>
+<p>插件<code>package.json</code>的 version 会先更新，然后才发布插件。</p>
+<p>你也可以通过命令行指定版本号：</p>
+<pre><code class="language-bash">vsce publish 2.0.1
+</code></pre>
+<h4 id="下架插件"><a class="header" href="#下架插件">下架插件</a></h4>
+<p>通过指定插件 id<code>publisher.extension</code>下架插件：</p>
+<pre><code>vsce unpublish (publisher name).(extension name)
+</code></pre>
+<p>!&gt; **注意：**当你下架插件的时候，市场会移除所有插件的历史统计数据，请在下架前再三考虑，最好还是更新插件吧。</p>
+<h4 id="插件打包"><a class="header" href="#插件打包">插件打包</a></h4>
+<p>你也可能只是想打包一下插件，而不是发布到商店里。用下列命令将插件打包到<code>.vsix</code>文件中：</p>
+<pre><code>vsce package
+</code></pre>
+<p>这个命令会在当前目录生成一个<code>.vsix</code>文件，直接从<code>.vsix</code>安装插件是允许的，查看<a href="https://github.com/Microsoft/vscode-docs/blob/master/docs/editor/extension-gallery.md#install-from-a-vsix">从 VSIX 安装插件</a>了解更多内容。</p>
+<h4 id="vs-code-版本兼容性"><a class="header" href="#vs-code-版本兼容性">VS Code 版本兼容性</a></h4>
+<p>当你制作插件的时候，你需要描述插件对 VS Code 的版本兼容性——修改<code>package.json</code>中的<code>engines.vscode</code>：</p>
+<pre><code class="language-json">{
+  &quot;engines&quot;: {
+    &quot;vscode&quot;: &quot;^1.8.0&quot;
+  }
+}
+</code></pre>
+<p><code>1.8.0</code>表示你的插件只能兼容<code>1.8.0</code>版本的 VS Code，<code>^1.8.0</code>则表示你的插件向上兼容，包括<code>1.8.1, 1.9.0</code>等等。</p>
+<p>使用<code>engines.vscode</code>可以确保插件安装环境包含了插件依赖的 API。这个机制在稳定版和 Insider 版本都适用。</p>
+<p>现在我们假设最新的稳定版 API 是<code>1.8.0</code>，而<code>1.9.0</code>引入了新的 API，所以你可以用<code>1.9.0-insider</code>标识插件在 Insider 版中也可正常使用。
+如果你想使用这些刚刚引入的 API，则将依赖版本设置为<code>^1.9.0</code>，你的插件则只能安装在<code>&gt;=1.9.0</code>的 VS Code 上，也就意味着所有当前的 Insider 版本都可以用得上，而稳定版只有在更新到<code>1.9.0</code>才能使用你的插件。</p>
+<h2 id="进阶用法"><a class="header" href="#进阶用法">进阶用法</a></h2>
+<hr />
+<h4 id="符合市场的插件"><a class="header" href="#符合市场的插件">符合市场的插件</a></h4>
+<p>你可以自定义插件在市场中的外观，查看示例<a href="https://marketplace.visualstudio.com/items/ms-vscode.Go">GO 插件</a>。</p>
+<p>下面是一些让你的插件在市场看起来更酷的小提示：</p>
+<ul>
+<li>
+<p>插件根目录下面的<code>README.md</code>文件可以用来填充插件市场的页面内容。<code>vsce</code>会将 README 中的链接通过下面两种方式修改掉：</p>
+<ul>
+<li>如果你的<code>package.json</code>的<code>repository</code>字段是一个 Github 仓库，<code>vsce</code>会自动检测，然后相应地调整链接。</li>
+<li>运行<code>vsce package</code>时，加上<code>--baseContentUrl</code>和<code>--baseImagesUrl</code>标识重载上述行为。</li>
+</ul>
+</li>
+<li>
+<p>插件根目录下的<code>LICENSE</code>会成为插件的 license。</p>
+</li>
+<li>
+<p>同样的<code>CHANGELOG.md</code>文件会成为插件的发布日志。</p>
+</li>
+<li>
+<p>通过设置<code>package.json</code>的<code>galleryBanner.color</code>hex 值，修改 banner 的背景色。</p>
+</li>
+<li>
+<p>通过给<code>package.json</code>中的<code>icon</code>设置一个相对路径，可以将一个<code>128px</code>的 PNG 图标放进你的插件中。</p>
+</li>
+<li>
+<p>参见<a href="https://github.com/Microsoft/vscode-docs/blob/master/docs/extensionAPI/extension-manifest.md#marketplace-presentation-tips">插件市场展现小提示</a></p>
+</li>
+</ul>
+<h4 id="vscodeignore"><a class="header" href="#vscodeignore"><code>.vscodeignore</code></a></h4>
+<p>创建一个<code>.vscodeignore</code>文件可以排除插件目录中的内容。这个文件支持<a href="https://github.com/isaacs/minimatch">glob</a>模式，每个表达式一行。</p>
+<p>例如：</p>
+<pre><code>**/*.ts
+**/tsconfig.json
+!file.ts
+</code></pre>
+<p>你应该忽略哪些不必在运行时用到的文件。例如：你的插件是用 Typescript 写的，那么你就应该忽略所有的<code>**/*.ts</code>文件。</p>
+<p>?&gt; **注意：**在<code>devDependencies</code>列出的开发依赖会被自动忽略，你不必将他们加入到<code>.vscodeignore</code>中。</p>
+<h5 id="预发布步骤"><a class="header" href="#预发布步骤">预发布步骤</a></h5>
+<p>你是可以在清单文件中添加预发布步骤的，下面的命令会在插件每次打包时执行：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;uuid&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;publisher&quot;: &quot;joaomoreno&quot;,
+  &quot;engines&quot;: {
+    &quot;vscode&quot;: &quot;0.10.x&quot;
+  },
+  &quot;scripts&quot;: {
+    &quot;vscode:prepublish&quot;: &quot;tsc&quot;
+  }
+}
+</code></pre>
+<p>上面的示例会在每次插件打包时调用 Typescript 编译器。</p>
+<h2 id="faq"><a class="header" href="#faq">FAQ</a></h2>
+<h5 id="问当我发布插件时遇到了-403-forbidden或-401-unauthorized错误"><a class="header" href="#问当我发布插件时遇到了-403-forbidden或-401-unauthorized错误">问：当我发布插件时遇到了 403 Forbidden（或 401 Unauthorized）错误？</a></h5>
+<p>答：很有可能是你创建 PAT (Personal Access Token) 时没有选择<code>all accessible accounts</code>。你还需要将授权范围设置为<code>All scopes</code>，这样发布工具才能工作。</p>
+<h5 id="问我没办法用vsce工具下架插件"><a class="header" href="#问我没办法用vsce工具下架插件">问：我没办法用<code>vsce</code>工具下架插件？</a></h5>
+<p>答：你可能改变了插件 ID 或者发行方名称。不过你还可以在<a href="https://marketplace.visualstudio.com/manage">管理页面</a>发布或者下架插件。</p>
+<h5 id="问为什么-vsce-不保留文件属性"><a class="header" href="#问为什么-vsce-不保留文件属性">问：为什么 vsce 不保留文件属性？</a></h5>
+<p>答：请注意，当你在 Windows 平台构建和发布插件的时候，所有插件包内的文件会丢失 POSIX 文件属性，或称之为执行位（executable bit）的东西。一些基于这些属性的<code>node_modules</code>依赖则会调整工作方式。从 Linux 和 macOS 平台构建则会如预期执行。</p>
+<h2 id="下一步"><a class="header" href="#下一步">下一步</a></h2>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/editor/extension-gallery">插件市场</a> - 学习更多 VS Code 公共插件市场。</li>
+<li><a href="/working-with-extensions/testing-extension.html">测试插件</a> - 添加插件测试，提高插件质量。</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../working-with-extensions/testing-extension.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../working-with-extensions/bundling-extension.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../working-with-extensions/testing-extension.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../working-with-extensions/bundling-extension.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
